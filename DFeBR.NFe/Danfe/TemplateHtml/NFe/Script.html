@@ -1,0 +1,21 @@
+﻿<script>
+    var pageHeight = #pageHeigth#;
+
+    var htmlEmitente = document.getElementById('htmlEmitente1').innerHTML;
+    htmlEmitente = htmlEmitente.replace("##FA##", 1);
+    htmlEmitente = htmlEmitente.replace("##TF##", 1);
+    document.getElementById('htmlEmitente1').innerHTML = htmlEmitente;
+
+    document.getElementById('waterMark').style.top = "#waterMarkTop#";
+    document.getElementById('waterMark').style.left = "#waterMarkLeft#";
+
+    var rodape = document.getElementById('textRodape');
+    var tabelaProdutos = document.getElementById('htmlProdutos1');
+
+    var textPos = (rodape.offsetTop - tabelaProdutos.offsetHeight);
+
+    var pageBottom = textPos - rodape.offsetHeight;
+    var remainingSpace = pageHeight - pageBottom;   
+
+    document.getElementById('htmlProdutos1').style.minHeight = remainingSpace.toString() + "px";
+</script>

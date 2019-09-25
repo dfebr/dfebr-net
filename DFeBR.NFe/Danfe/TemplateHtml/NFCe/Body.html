@@ -1,0 +1,42 @@
+﻿<div class="bordaDivisora">
+    <div class="content100 bold" style="float: none; margin: auto; text-align: center; margin-top: 10px;">        
+        DOCUMENTO AUXILIAR DA NOTA FISCAL DE CONSUMIDOR ELETRÔNICA        
+    </div>
+    <div class="content100" style="float: none; margin: auto; text-align: center; margin-top: 10px;">
+        NÃO PERMITE APROVEITAMENTO DE CRÉDITO DE ICMS
+    </div>
+    <div runat="server" id="tipoEmissao" class="content100 bold" style="float: none; margin: auto; text-align: center; margin-top: 10px;">
+        #EmissionType#
+    </div>
+    <br />
+</div>
+<div class="bordaDivisora" runat="server" id="TotaisProdutos">
+    <table id="TotaisProdutosTable">
+        <thead>
+            <tr>
+                <th style="width: 10%;">Código</th>
+                <th style="width: 48%;">Descrição</th>
+                <th style="width: 15%;">Vlr Unit.</th>
+                <th style="width: 10%;">Un</th>
+                <th style="width: 10%;">Qtd</th>
+                <th style="width: 15%;">Vlr Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            #Products#
+        </tbody>
+    </table>
+    <div style="width:100%; height:1px"></div>
+    <table id="tabletotaisprodutos" style="width: 100%;">
+        <thead></thead>
+        #TotalsProducts#
+    </table>
+    #Taxes#
+    #AdditionalInformations#
+</div>
+<div class="bordaDivisora" style="text-align: center;" id="DadosNFCe">
+    #Data#
+</div>
+<div class="bordaDivisora" style="text-align: center;" id="DadosConsumidor">
+    #Recipient#
+</div>

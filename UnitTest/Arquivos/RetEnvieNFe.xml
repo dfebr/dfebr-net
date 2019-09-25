@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<soap:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+
+
+  <soap:Body>
+
+
+    <nfeResultMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4">
+
+
+      <retEnviNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+
+        <tpAmb>2</tpAmb>
+
+        <verAplic>SVRSnfce201807191353</verAplic>
+
+        <cStat>104</cStat>
+
+        <xMotivo>Lote processado</xMotivo>
+
+        <cUF>29</cUF>
+
+        <dhRecbto>2019-04-17T23:41:03-03:00</dhRecbto>
+        <protNFe versao="4.00">
+          <infProt><tpAmb>2</tpAmb><verAplic>SVRSnfce201807191353</verAplic><chNFe>29190417784038000103650010000000011000012345</chNFe><dhRecbto>2019-04-17T23:41:03-03:00</dhRecbto><digVal>Dr2S7t9lH1UW7rwA5eJjee78sKU=</digVal><cStat>704</cStat><xMotivo>Rejeicao: NFC-e com Data-Hora de emissao atrasada</xMotivo></infProt>
+          <infProt>
+            <tpAmb>2</tpAmb>
+            <verAplic>SVRSnfce201807191353</verAplic>
+            <chNFe>29190417784038000103650010000000011000012345</chNFe>
+            <dhRecbto>2019-04-17T23:41:03-03:00</dhRecbto>
+            <digVal>Dr2S7t9lH1UW7rwA5eJjee78sKU=</digVal>
+            <cStat>704</cStat>
+            <xMotivo>Rejeicao: NFC-e com Data-Hora de emissao atrasada</xMotivo>
+          </infProt>
+          <infProt>
+            <tpAmb>2</tpAmb>
+            <verAplic>SVRSnfce201807191353</verAplic>
+            <chNFe>29190417784038000103650010000000011000012345</chNFe>
+            <dhRecbto>2019-04-17T23:41:03-03:00</dhRecbto>
+            <digVal>Dr2S7t9lH1UW7rwA5eJjee78sKU=</digVal>
+            <cStat>704</cStat>
+            <xMotivo>Rejeicao: NFC-e com Data-Hora de emissao atrasada</xMotivo>
+          </infProt>
+        </protNFe>
+
+      </retEnviNFe>
+
+    </nfeResultMsg>
+
+  </soap:Body>
+
+</soap:Envelope>

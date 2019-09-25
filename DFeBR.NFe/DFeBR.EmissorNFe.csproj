@@ -1,0 +1,249 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Valnei Batista Filho, Marco Polo Viana</Authors>
+    <Product>EmissorNFe</Product>
+    <Description>Emissor de Notas Fiscais Eletrônica</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Danfe\CFe\**" />
+    <Compile Remove="Danfe\ClosedCashierPDV\**" />
+    <Compile Remove="Danfe\Entidades\CashierPDV\**" />
+    <Compile Remove="Danfe\Entidades\CFeTaxInvoice\**" />
+    <Compile Remove="Danfe\Entidades\Inutilization\**" />
+    <Compile Remove="Danfe\Entidades\TaxInvoiceEvent\**" />
+    <Compile Remove="Danfe\Entidades\TaxInvoice\**" />
+    <Compile Remove="Danfe\Interfaces\lib\**" />
+    <EmbeddedResource Remove="Danfe\CFe\**" />
+    <EmbeddedResource Remove="Danfe\ClosedCashierPDV\**" />
+    <EmbeddedResource Remove="Danfe\Entidades\CashierPDV\**" />
+    <EmbeddedResource Remove="Danfe\Entidades\CFeTaxInvoice\**" />
+    <EmbeddedResource Remove="Danfe\Entidades\Inutilization\**" />
+    <EmbeddedResource Remove="Danfe\Entidades\TaxInvoiceEvent\**" />
+    <EmbeddedResource Remove="Danfe\Entidades\TaxInvoice\**" />
+    <EmbeddedResource Remove="Danfe\Interfaces\lib\**" />
+    <None Remove="Danfe\CFe\**" />
+    <None Remove="Danfe\ClosedCashierPDV\**" />
+    <None Remove="Danfe\Entidades\CashierPDV\**" />
+    <None Remove="Danfe\Entidades\CFeTaxInvoice\**" />
+    <None Remove="Danfe\Entidades\Inutilization\**" />
+    <None Remove="Danfe\Entidades\TaxInvoiceEvent\**" />
+    <None Remove="Danfe\Entidades\TaxInvoice\**" />
+    <None Remove="Danfe\Interfaces\lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Danfe\Entidades\WebServiceNFe.cs" />
+    <Compile Remove="Danfe\HTMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\ICancellationXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\ICorrectionLetterXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IElementIdeXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IGeneratorXMLCFe`1.cs" />
+    <Compile Remove="Danfe\Interfaces\IICMSTaxXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IInutilizationXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IInvoiceXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IIPITaxXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IPaymentsXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IProductsXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IQrCodeXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\IRecipientAddressXMLGenerator.cs" />
+    <Compile Remove="Danfe\Interfaces\ISoapGeneratorService.cs" />
+    <Compile Remove="Danfe\Interfaces\ITotalsXMLGenerator.cs" />
+    <Compile Remove="Servicos\Templates\ConsultaTemplate.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Danfe\TemplateHtml\NFe\" />
+    <Folder Include="Danfe\TemplateHtml\NFCe\" />
+    <Folder Include="Dominio\" />
+    <Folder Include="Builders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetBarcode" Version="1.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="QRCoder" Version="1.3.5" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfigWeb.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\AdditionalInformation.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Body.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Data.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Footer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Header.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Payments.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Products.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Recipient.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Structure.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Taxes.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFCe\Total.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\AdditionalInformation.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Body.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Footer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Header.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Invoice.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\InvoiceItem.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\ISSQN.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Issuer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Products.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Recipient.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Script.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Structure.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Total.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Trailer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\TrailerItem.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Transport.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Volume.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\Volumes.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\VolumesList.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Danfe\TemplateHtml\NFe\VolumesListItem.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\consReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\consSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\consStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\e110111_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\envEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\enviNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\eventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\inutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\leiauteConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\leiauteConsStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\leiauteEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\leiauteInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\leiauteNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\nfe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\procEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\procInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\procNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retConsReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retConsStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retEnvEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retEnviNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\retInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\tiposBasico_v1.03.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\tiposBasico_v4.00.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Schemas\versao4.00\xmldsig-core-schema_v1.01.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

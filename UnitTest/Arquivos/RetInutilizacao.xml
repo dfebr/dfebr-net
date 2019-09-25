@@ -1,0 +1,19 @@
+<nfeResultMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4">
+  <retInutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+    <infInut>
+      <tpAmb>2</tpAmb>
+      <verAplic>SEFAZBA_NFENW_v7.0.2</verAplic>
+      <cStat>102</cStat>
+      <xMotivo>Inutilizacao de numero homologado</xMotivo>
+      <cUF>29</cUF>
+      <ano>19</ano>
+      <CNPJ>17784038000103</CNPJ>
+      <mod>55</mod>
+      <serie>1</serie>
+      <nNFIni>1</nNFIni>
+      <nNFFin>3</nNFFin>
+      <dhRecbto>2019-04-23T20:45:58-03:00</dhRecbto>
+      <nProt>229190000018798</nProt>
+    </infInut>
+  </retInutNFe>
+</nfeResultMsg>

@@ -1,0 +1,71 @@
+{
+  "nfe": {
+    "nfehomo": {
+      "recebeEvento": "https://nfe-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx?NFeRecepcaoEvento4",
+      "inutiliza": "https://hnfe.sefaz.ba.gov.br/webservices/NFeInutilizacao4/NFeInutilizacao4.asmx",
+      "consultaProtocolo": "https://hnfe.sefaz.ba.gov.br/webservices/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx",
+      "statusServico": "https://nfe-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NFeStatusServico4.asmx",
+      "autoriza": "https://hnfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx",
+      "consultaRecibo": "https://hnfe.sefaz.ba.gov.br/webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx",
+      "cancelar": ""
+    },
+    "nfeprod": {
+      "recebeEvento": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx?NFeRecepcaoEvento4",
+      "inutiliza": "",
+      "consultaProtocolo": "",
+      "statusServico": "",
+      "autoriza": "https://hnfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx",
+      "consultaRecibo": "https://nfe.sefaz.ba.gov.br/webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx",
+      "cancelar": "",
+      "contingenciaSvcan": "https://hnfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx",
+      "contingenciaSvcrs": "https://hnfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx",
+      "contingenciaDpec": "https://hnfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"
+    }
+  },
+
+  "nfce": {
+    "nfcehomo": {
+      "recebeEvento": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx?NFeRecepcaoEvento4",
+      "inutiliza": "https://hnfe.sefaz.ba.gov.br/webservices/NFeInutilizacao4/NFeInutilizacao4.asmx",
+      "consultaProtocolo": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx?NFeConsultaProtocolo4",
+      "statusServico": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NFeStatusServico4.asmx",
+      "autoriza": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx",
+      "qrcodeConsulta": "http://hinternet.sefaz.ba.gov.br/nfce/consulta",
+      "qrcodeChave": "http://hnfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx",
+      "consultaRecibo": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx",
+      "cancelar": "https://hnfe.sefaz.ba.gov.br/webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx"
+    },
+    "nfceprod": {
+      "recebeEvento": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx?NFeRecepcaoEvento4",
+      "inutiliza": "",
+      "consultaProtocolo": "",
+      "statusServico": "",
+      "autoriza": "",
+      "qrcodeConsulta": "",
+      "qrcodeChave": "",
+      "consultaRecibo": "https://nfe.sefaz.ba.gov.br/webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx",
+      "cancelar": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx"
+    }
+  },
+
+  "wsdl": {
+    "statusServico": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4",
+    "autoriza": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4",
+    "consultaProtocolo": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4",
+    "inutiliza": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4",
+    "consultaRecibo": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4",
+    "cancelar": "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRecepcaoEvento4"
+  },
+
+  "schema": {
+    "statusServico": ["consStatServ_v4.00.xsd", "leiauteConsStatServ_v4.00.xsd", "tiposBasico_v4.00.xsd"],
+    "autoriza": ["enviNFe_v4.00.xsd", "leiauteNFe_v4.00.xsd", "tiposBasico_v4.00.xsd", "nfe_v4.00.xsd","xmldsig-core-schema_v1.01.xsd"],
+    "consultaProtocolo": ["consSitNFe_v4.00.xsd", "leiauteConsSitNFe_v4.00.xsd", "tiposBasico_v4.00.xsd", "xmldsig-core-schema_v1.01.xsd"],
+    "inutiliza": ["inutNFe_v4.00.xsd", "leiauteInutNFe_v4.00.xsd", "tiposBasico_v4.00.xsd", "xmldsig-core-schema_v1.01.xsd"],
+    "consultaRecibo": ["consReciNFe_v4.00.xsd", "leiauteNFe_v4.00.xsd", "tiposBasico_v4.00.xsd", "xmldsig-core-schema_v1.01.xsd"],
+    "cancelar": ["e110111_v1.00.xsd","envEventoCancNFe_v1.00.xsd","eventoCancNFe_v1.00.xsd","leiauteEventoCancNFe_v1.00.xsd","procEventoCancNFe_v1.00.xsd","retEnvEventoCancNFe_v1.00.xsd","tiposBasico_v1.03.xsd","xmldsig-core-schema_v1.01.xsd"
+    ]
+
+  }
+
+}
