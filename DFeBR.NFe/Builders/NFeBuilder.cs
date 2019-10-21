@@ -13,10 +13,13 @@
 #region
 
 using DFeBR.EmissorNFe.Builders.Destinatario;
+using DFeBR.EmissorNFe.Builders.Detalhe;
 using DFeBR.EmissorNFe.Builders.Identificacao;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes;
+using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
@@ -32,15 +35,27 @@ namespace DFeBR.EmissorNFe.Builders
             NFe.infNFe = new infNFe();
         }
     
-        public void SetIdentificacao(IdentificacaoNFe identificacao)
+        public NFeBuilder SetIdentificacao(IdentificacaoNFe identificacao)
         {
             NFe.infNFe.ide = identificacao.Ide;
+            return this;
         }
 
-        public void SetDestinatario(DestinatarioNFe destinatario)
+        public NFeBuilder SetDestinatario(DestinatarioNFe destinatario)
         {
             NFe.infNFe.dest = destinatario.Dest;
+            return this;
         }
 
+        public void AddDetalhe(DetalheNFe detalhe)
+        {
+            NFe.infNFe.det.Add(detalhe.Det);
+        }
+
+        public NFeBuilder AddDetalhesRange(List<DetalheNFe> detalhes)
+        {
+            NFe.infNFe.det.AddRange(detalhes.Select(d => d.Det).ToList());
+            return this;
+        }
     }
 }
