@@ -1,2 +1,2 @@
 # dfebr-net
-Documentos Fiscal em .Net
+Documentos Fiscal em .Net Standard
