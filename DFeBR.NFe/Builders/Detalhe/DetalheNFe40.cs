@@ -51,7 +51,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         /// <param name="nItemPed"></param>
         /// <param name="nFCI"></param>
         /// <param name="nRECOPI"></param>
-        public DetalheNFe40(Configurar config, int nItem,
+        public DetalheNFe40(int nItem,
             string cProd, string cEan, string xProd, string NCM,
             string CEST, indEscala? indEscala, string CNPJFab,
             string cBenef, string EXTIPI, int CFOP,
@@ -113,7 +113,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         /// <param name="uTrib"></param>
         /// <param name="vUnTrib"></param>
         /// <param name="indTot"></param>
-        public DetalheNFe40(Configurar config, int nItem,
+        public DetalheNFe40(int nItem,
             string cProd, string cEan, string xProd, string NCM,
             string CEST, indEscala? indEscala, string CNPJFab,
             string cBenef, string EXTIPI, int CFOP,

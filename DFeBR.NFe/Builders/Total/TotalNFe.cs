@@ -6,9 +6,9 @@ namespace DFeBR.EmissorNFe.Builders.Total
     {
         internal ICMSTot IcmsTot { get; set; }
 
-        public TotalNFe()
+        protected void SetTotal(ICMSTot tot)
         {
-
+            IcmsTot = tot;
         }
     }
 }

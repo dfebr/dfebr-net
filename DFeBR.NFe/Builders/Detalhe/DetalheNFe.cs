@@ -17,17 +17,6 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         {
             Det = det;
             det.imposto = new imposto();
-
-            Validar();
-        }
-
-        internal void Validar()
-        {
-            AssertionConcern.AssertArgumentEquals(Det.nItem, 0, "O número do item (nItem) deve ser maior que zero. Os itens também deve estar em ordem crescente.");
-            AssertionConcern.AssertArgumentNotNullOrEmpty(Det.prod.xProd, "O nome do produto (xProd) é obrigatório");
-            AssertionConcern.AssertArgumentNotNullOrEmpty(Det.prod.cEAN, "O Código EAN/GTIN do produto (cEAN) é obrigatório");
-            AssertionConcern.AssertArgumentNotNullOrEmpty(Det.prod.NCM, "O NCM é obrigatório");
-            AssertionConcern.AssertArgumentEquals(Det.prod.CFOP, 0, "O CFOP é obrigatório");
         }
 
         protected void InformarICMS(ICMSBasico icms)
