@@ -36,7 +36,7 @@ namespace DFeBR.EmissorNFe.Builders.Identificacao
             TipoEmissao tpEmis, FinalidadeNFe finNFe, ConsumidorFinal indFinal,
             PresencaComprador indPres, string versaoProcesso, DateTime? dhCont = null, string xJust = "")
         {
-            SetIde(new ide
+            var ide = new ide
             {
                 cUF = config.EmissorConfig.Estado,
                 cNF = cNf,
@@ -57,10 +57,15 @@ namespace DFeBR.EmissorNFe.Builders.Identificacao
                 finNFe = finNFe,
                 indFinal = indFinal,
                 indPres = indPres,
-                verProc = versaoProcesso,
-                dhCont = dhCont,
-                xJust = xJust
-            });
+                verProc = versaoProcesso
+            };
+
+            if (dhCont != null)
+                ide.dhCont = dhCont.Value;
+            if (xJust != null)
+                ide.xJust = xJust;
+
+            SetIde(ide);
         }
     }
 }

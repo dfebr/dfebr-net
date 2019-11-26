@@ -13,7 +13,9 @@
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe.Tributacao.Estadual;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
- 
+using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe.Tributacao.Federal;
+using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe.Tributacao.Federal.Tipos;
+using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Detalhe.Tributacao.Municipal;
 
 namespace DFeBR.EmissorNFe.Builders.Detalhe
 {
@@ -49,7 +51,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         /// <param name="nItemPed"></param>
         /// <param name="nFCI"></param>
         /// <param name="nRECOPI"></param>
-        public DetalheNFe40(Configurar config, int nItem,
+        public DetalheNFe40(int nItem,
             string cProd, string cEan, string xProd, string NCM,
             string CEST, indEscala? indEscala, string CNPJFab,
             string cBenef, string EXTIPI, int CFOP,
@@ -111,7 +113,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         /// <param name="uTrib"></param>
         /// <param name="vUnTrib"></param>
         /// <param name="indTot"></param>
-        public DetalheNFe40(Configurar config, int nItem,
+        public DetalheNFe40(int nItem,
             string cProd, string cEan, string xProd, string NCM,
             string CEST, indEscala? indEscala, string CNPJFab,
             string cBenef, string EXTIPI, int CFOP,
@@ -250,7 +252,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
                 motDesICMS = motDesICMS
             });
         }
-        
+
         public void SetICMS51(OrigemMercadoria orig,
             DeterminacaoBaseIcms? modBC, decimal? pRedBC,
             decimal? vBC, decimal? pICMS, decimal? vICMSOp,
@@ -404,7 +406,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
             InformarICMS(new ICMSSN101
             {
                 orig = orig,
-                CSOSN =  Csosnicms.Csosn101,                
+                CSOSN = Csosnicms.Csosn101,
                 pCredSN = pCredSN,
                 vCredICMSSN = vCredICMSSN
             });
@@ -414,6 +416,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         {
             InformarICMS(new ICMSSN102
             {
+                orig = orig,
                 CSOSN = Csosnicms.Csosn102
             });
         }
@@ -434,9 +437,9 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
                 vBCST = vBCST,
                 pICMSST = pICMSST,
                 vICMSST = vICMSST,
-                vBCFCPST = vBCFCPST,                
+                vBCFCPST = vBCFCPST,
                 pFCPST = pFCPST,
-                vFCPST = vFCPST,                
+                vFCPST = vFCPST,
                 pCredSN = pCredSN,
                 vCredICMSSN = vCredICMSSN
             });
@@ -445,7 +448,7 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         public void SetICMSSN202(OrigemMercadoria orig,
             DeterminacaoBaseIcmsSt modBCST, decimal? pMVAST,
             decimal? pRedBCST, decimal vBCST, decimal pICMSST,
-            decimal vICMSST, decimal? vBCFCPST, decimal? pFCPST, 
+            decimal vICMSST, decimal? vBCFCPST, decimal? pFCPST,
             decimal? vFCPST)
         {
             InformarICMS(new ICMSSN202
@@ -520,10 +523,164 @@ namespace DFeBR.EmissorNFe.Builders.Detalhe
         #endregion
 
         #region Identificacao IPI
-        public void SetIPI(string clEnq, string CNPJProd,
-            string cSelo, int? qSelo, int cEnq)
+        public void SetIPI(CSTIPI cst, decimal pIpi, decimal vBc,
+            decimal vIpi, decimal qUnid, decimal vUnid,
+            string clEnq, int cEnq,
+            string cSelo, int qSelo,
+            string cnpjProd)
         {
+            InformarIPI(new IPITrib
+            {
+                CST = cst,
+                pIPI = pIpi,
+                vBC = vBc,
+                vIPI = vBc,
+                qUnid = qUnid,
+                vUnid = vUnid,
+            }, clEnq, cEnq, cSelo, qSelo, cnpjProd);
+        }
+        #endregion
 
+        #region Identificacao PIS
+        public void SetPISOutr(CSTPIS cst, decimal pPis,
+             decimal qBCProd, decimal vAliqProd,
+             decimal vBC, decimal vPIS)
+        {
+            InformarPIS(new PISOutr
+            {
+                CST = cst,
+                pPIS = pPis,
+                qBCProd = qBCProd,
+                vAliqProd = vAliqProd,
+                vBC = vBC,
+                vPIS = vPIS
+            });
+        }
+
+        public void SetPISQtde(CSTPIS cst, decimal qBCProd,
+            decimal vAliqProd, decimal vPIS)
+        {
+            InformarPIS(new PISQtde
+            {
+                CST = cst,
+                qBCProd = qBCProd,
+                vAliqProd = vAliqProd,
+                vPIS = vPIS
+            });
+        }
+
+        public void SetPISST(decimal qBCProd,
+            decimal vAliqProd, decimal pPis, decimal vBC,
+            decimal vPis)
+        {
+            InformarPIS(new PISST
+            {
+                qBCProd = qBCProd,
+                vAliqProd = vAliqProd,
+                pPIS = pPis,
+                vBC = vBC,
+                vPIS = vPis
+            });
+        }
+        #endregion
+
+        #region Identificacao COFINS
+        public void SetCOFINSAliq(CSTCOFINS cst, decimal vBC,
+            decimal pCofins, decimal vCofins)
+        {
+            InformarCOFINS(new COFINSAliq
+            {
+                CST = cst,
+                vBC = vBC,
+                pCOFINS = pCofins,
+                vCOFINS = vCofins
+
+            });
+        }
+
+        public void SetCOFINSOutr(CSTCOFINS cst, decimal vBC,
+            decimal pCofins, decimal qBcProd, decimal vAliqProd,
+            decimal vCofins)
+        {
+            InformarCOFINS(new COFINSOutr
+            {
+                CST = cst,
+                vBC = vBC,
+                pCOFINS = pCofins,
+                qBCProd = qBcProd,
+                vAliqProd = vAliqProd,
+                vCOFINS = vCofins
+            });
+        }
+
+        public void SetCofinsQtde(CSTCOFINS cst, decimal qBcProd,
+            decimal vAliqProd, decimal vCofins)
+        {
+            InformarCOFINS(new COFINSQtde
+            {
+                CST = cst,
+                qBCProd = qBcProd,
+                vAliqProd = vAliqProd,
+                vCOFINS = vCofins
+            });
+        }
+
+        public void SetCofinsST(decimal vBC, decimal pCofins,
+            decimal qBCProd, decimal vAliqProd, decimal vCofins)
+        {
+            InformarCOFINS(new COFINSST
+            {
+                vBC = vBC,
+                pCOFINS = pCofins,
+                qBCProd = qBCProd,
+                vAliqProd = vAliqProd,
+                vCOFINS = vCofins
+            });
+        }
+        #endregion
+
+        #region Identificacao II
+        public void SetII(decimal vBC, decimal vDespAdu,
+            decimal vII, decimal vIOF)
+        {
+            InformarII(new II
+            {
+                vBC = vBC,
+                vDespAdu = vDespAdu,
+                vII = vII,
+                vIOF = vIOF
+            });
+        }
+        #endregion
+
+        #region Identificacao ISSQN
+        public void SetISSQN(decimal vBC, decimal vAliq, decimal vISSQN,
+            long cMunFG, string cListServ,
+            decimal vDeducao, decimal vOutro, decimal vDescIncond,
+            decimal vDescCond, decimal vISSRet,
+            IndicadorISS indISS, string cServico,
+            long cMun, int cPais, string nProcesso,
+            indIncentivo indIncentivo)
+        {
+            InformarISSQN(new ISSQN
+            {
+                vBC = vBC,
+                vAliq = vAliq,
+                vISSQN = vISSQN,
+                cMunFG = cMunFG,
+                cListServ = cListServ,
+                vDeducao = vDeducao,
+                vOutro = vOutro,
+                vDescIncond = vDescIncond,
+                vDescCond = vDescCond,
+                vISSRet = vISSRet,
+                indISS = indISS,
+                cServico = cServico,
+                cMun = cMun,
+                cPais = cPais,
+                nProcesso = nProcesso,
+                indIncentivo = indIncentivo
+            });
         }
         #endregion
     }

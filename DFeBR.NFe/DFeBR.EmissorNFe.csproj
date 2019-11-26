@@ -58,7 +58,6 @@
     <Folder Include="Danfe\TemplateHtml\NFe\" />
     <Folder Include="Danfe\TemplateHtml\NFCe\" />
     <Folder Include="Dominio\" />
-    <Folder Include="Builders\" />
   </ItemGroup>
 
   <ItemGroup>
