@@ -14,7 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{1B818765-4DB
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFeBR.EmissorNFe", "DFeBR.NFe\DFeBR.EmissorNFe.csproj", "{A13169EB-F59E-40E7-AE13-FAE6A8F19E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFeBR.EmissorNFe", "DFeBR.NFe\DFeBR.EmissorNFe.csproj", "{A13169EB-F59E-40E7-AE13-FAE6A8F19E6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docx", "Docx", "{311529C8-7777-4163-B5F3-03CB3AD54E82}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\Overview do projeto.docx = ..\..\..\..\Downloads\Overview do projeto.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PDF", "PDF", "{D0EA6B68-8ED8-4E46-B874-EC307B16B543}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\Overview DFeBR.Net.pdf = ..\..\..\..\Downloads\Overview DFeBR.Net.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +47,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{738B5248-4C0E-41B9-9BAC-6B915D40BBEC} = {885C1486-48A8-4A06-B6B9-8B7D6C71D4D0}
 		{A13169EB-F59E-40E7-AE13-FAE6A8F19E6F} = {C9373BFD-6FE0-4450-9ADB-7BC6F05D1862}
+		{311529C8-7777-4163-B5F3-03CB3AD54E82} = {1B818765-4DB5-4118-867D-694492F4D01B}
+		{D0EA6B68-8ED8-4E46-B874-EC307B16B543} = {1B818765-4DB5-4118-867D-694492F4D01B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C693D1E-B026-44DA-AEAF-27BD1A029881}

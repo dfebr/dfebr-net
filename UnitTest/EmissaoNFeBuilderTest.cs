@@ -9,9 +9,7 @@ using DFeBR.EmissorNFe.Builders.Total;
 using DFeBR.EmissorNFe.Builders.Transporte;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar;
 using DFeBR.EmissorNFe.Servicos.Interfaces;
-using DFeBR.EmissorNFe.Servicos.Templates;
 using DFeBR.EmissorNFe.Servicos.VersaoNFe4;
-using System.Collections.Generic;
 
 namespace UnitTest
 {
@@ -19,21 +17,21 @@ namespace UnitTest
     {
         private EmissorServicoConfig GetConfig()
         {
-            var config = new EmissorServicoConfig();
-            config.ConfiguraEmitente();
-            config.ConfiguraCertificadoA1Repositorio();
-            config.ConfiguraCSC("", "");
-            config.
-            .....
+            var config = new EmissorServicoConfig(...);
+            config.ConfiguraEmitente(...);
+            config.ConfiguraCertificadoA1Repositorio("serial do certificado");
+            config.ConfiguraCSC("CscID", "CscToken");
+            config.ConfiguraArquivoRetorno(true, @"C:\XML\");
+
             return config;
         }
 
         private DetalheNFe40 GetDetalhe()
         {
-            var detalhe = new DetalheNFe40(....);
-            detalhe.SetICMS20(....);
-            detalhe.SetIPI(....);
-            detalhe.SetPISOutr(....);
+            var detalhe = new DetalheNFe40(...);
+            detalhe.SetICMS20(...);
+            detalhe.SetIPI(...);
+            detalhe.SetPISOutr(...);
             detalhe.SetII(...);
             detalhe.SetCOFINSOutr(...);
 
@@ -52,7 +50,7 @@ namespace UnitTest
         {
             var cobr = new CobrancaNFe40(,);
             cobr.AddDuplicata(,);
-           
+
             return cobr;
         }
 
@@ -67,17 +65,17 @@ namespace UnitTest
         public void EmitirNFeComBuilder()
         {
             NFeBuilder builder = new NFeBuilder(GetConfig());
-            builder.SetIdentificacao(new IdentificacaoNFe40());
-            builder.SetDestinatario(new DestinatarioNFe40());
+            builder.SetIdentificacao(new IdentificacaoNFe40(...));
+            builder.SetDestinatario(new DestinatarioNFe40(...));
             builder.AddDetalhe(GetDetalhe());
             builder.SetTotal(new TotalNFe40(.....));
-            builder.SetTransporte(GetTransporte());
+            builder.SetTransporte(new TransporteNFe40());
             builder.SetCobranca(GetCobranca());
             builder.AddPagamento(GetPagamento());
             builder.SetResponsavel(new ResponsavelTecNFe40(....));
 
             var servNfe = new ServNFe4(GetConfig());
-            servNfe.Autorizar(builder.NFe);
+            IRetAutorz retorno = servNfe.Autorizar(builder.NFe);
         }
     }
 }
