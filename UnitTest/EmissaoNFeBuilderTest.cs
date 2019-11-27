@@ -21,6 +21,9 @@ namespace UnitTest
         {
             var config = new EmissorServicoConfig();
             config.ConfiguraEmitente();
+            config.ConfiguraCertificadoA1Repositorio();
+            config.ConfiguraCSC("", "");
+            config.
             .....
             return config;
         }
@@ -74,7 +77,7 @@ namespace UnitTest
             builder.SetResponsavel(new ResponsavelTecNFe40(....));
 
             var servNfe = new ServNFe4(GetConfig());
-            servNfe.Autorizar(1, new List<NFeBuilder> { builder });
+            servNfe.Autorizar(builder.NFe);
         }
     }
 }

@@ -300,7 +300,7 @@ namespace UnitTest
             var retorno = Utils.LerArquivo("Arquivos", "RetEnvieNFe.xml");
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retEnviNFe", retorno);
-            var retENviNFe = Utils.XmlStringParaClasse<retEnviNFe>(node);
+            var retENviNFe = Utils.ConverterXMLParaClasse<retEnviNFe>(node);
             var count = retENviNFe.protNFe.infProt.Count;
             Assert.Equal(3, count);
         }
@@ -313,7 +313,7 @@ namespace UnitTest
             var retorno = Utils.LerArquivo("Arquivos", "RetConsStatServ.xml");
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retConsStatServ", retorno);
-            var retConsNFe = Utils.XmlStringParaClasse<retConsStatServ>(node);
+            var retConsNFe = Utils.ConverterXMLParaClasse<retConsStatServ>(node);
             var codStatus = retConsNFe.cStat;
             Assert.Equal(107, codStatus);
         }

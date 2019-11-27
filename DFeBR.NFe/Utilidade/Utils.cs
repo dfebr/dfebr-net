@@ -669,12 +669,12 @@ namespace DFeBR.EmissorNFe.Utilidade
         #region Xml
 
         /// <summary>
-        ///     Serializa a classe passada para uma string no form
+        ///     Converte uma instancia de objeto para uma string XML
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="objeto"></param>
         /// <returns></returns>
-        public static string ClasseParaXmlString<T>(T objeto)
+        public static string ObterStringXML<T>(this T objeto)
         {
             XElement xml;
             var keyNomeClasseEmUso = typeof(T).FullName;
@@ -699,7 +699,7 @@ namespace DFeBR.EmissorNFe.Utilidade
         /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static T XmlStringParaClasse<T>(string input) where T : class
+        public static T ConverterXMLParaClasse<T>(this string input) where T : class
         {
             var keyNomeClasseEmUso = typeof(T).FullName;
             var ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
@@ -744,7 +744,7 @@ namespace DFeBR.EmissorNFe.Utilidade
             var dir = Path.GetDirectoryName(arquivo);
             if (dir != null && !Directory.Exists(dir))
                 throw new DirectoryNotFoundException("Diretório " + dir + " não encontrado!");
-            var xml = ClasseParaXmlString(objeto);
+            var xml = ObterStringXML(objeto);
             try
             {
                 var stw = new StreamWriter(arquivo);

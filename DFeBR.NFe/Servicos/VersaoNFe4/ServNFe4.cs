@@ -12,17 +12,16 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using DFeBR.EmissorNFe.Builders;
+using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Evento;
 using DFeBR.EmissorNFe.Servicos.Interfaces;
 using DFeBR.EmissorNFe.Utilidade;
 using DFeBR.EmissorNFe.Utilidade.Exceptions;
 using DFeBR.EmissorNFe.Utilidade.Tipos;
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 #endregion
 
@@ -66,7 +65,8 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         /// <returns>Retorna status do serviço</returns>
         public IRetConsStat ConsultarStatus()
         {
-            var n2 = new ServConsStatNfe4(EmissorConfig, X509Certificate2, VersaoServico.Ve400);
+            var n2 = new ServConsStatNfe4(EmissorConfig, X509Certificate2,
+                VersaoServico.Ve400);
             return n2.Executar();
         }
 
@@ -74,17 +74,16 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         ///     Solicita autorização de uma NFe
         /// </summary>
         /// <param name="idLote">ID do Lote</param>
-        /// <param name="nFeBuilder">Builder NFe</param>
+        /// <param name="nfes">Builder NFe</param>
         /// <param name="compactarMensagem">Define se a mensagem será enviada para a SEFAZ compactada</param>
         /// <returns></returns>
-        public IRetAutorz Autorizar(int idLote, List<NFeBuilder> nFeBuilder, bool compactarMensagem = false)
+        public IRetAutorz Autorizar(int idLote, List<NFe> nfes,
+            bool compactarMensagem = false)
         {
-            var nFes = nFeBuilder.Select(n => n.NFe).ToList();
-            var n2 = new ServAutorzNfe4(EmissorConfig, X509Certificate2, idLote, nFes, VersaoServico.Ve400, compactarMensagem); 
+            var n2 = new ServAutorzNfe4(EmissorConfig, X509Certificate2,
+                idLote, nfes, VersaoServico.Ve400, compactarMensagem);
             return n2.Executar();
         }
-
-
 
         /// <summary>
         ///     Solicita autorização de uma NFe
@@ -92,9 +91,11 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         /// <param name="xmlNFe">Uma string Xml</param>
         /// <param name="compactarMensagem">Define se a mensagem será enviada para a SEFAZ compactada</param>
         /// <returns></returns>
-        public IRetAutorz Autorizar(string xmlNFe, bool compactarMensagem = false)
+        public IRetAutorz Autorizar(NFe nfe, bool compactarMensagem = false)
         {
-            var n2 = new ServAutorzNfe4(EmissorConfig, X509Certificate2, xmlNFe, VersaoServico.Ve400, compactarMensagem);
+            string xmlNFe = nfe.ObterStringXML();
+            var n2 = new ServAutorzNfe4(EmissorConfig, X509Certificate2,
+                xmlNFe, VersaoServico.Ve400, compactarMensagem);
             return n2.Executar();
         }
 
@@ -109,11 +110,12 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         /// <param name="numeroFinal">Numero final</param>
         /// <param name="justificativa">Justificativa</param>
         /// <returns></returns>
-        public IRetInut Inutilizar(string cnpj, int ano, string modelo, int serie, int numeroInicial, int numeroFinal, string justificativa)
+        public IRetInut Inutilizar(string cnpj, int ano, string modelo,
+            int serie, int numeroInicial, int numeroFinal, string justificativa)
         {
             var modeloDoc = ModeloDocumento(modelo);
-            var n2 = new ServInutNfe4(EmissorConfig, X509Certificate2, cnpj, ano, modeloDoc, serie, numeroInicial, numeroFinal,
-                    justificativa);
+            var n2 = new ServInutNfe4(EmissorConfig, X509Certificate2, cnpj, ano, 
+                modeloDoc, serie, numeroInicial, numeroFinal, justificativa);
             return n2.Executar();
         }
 
@@ -127,7 +129,8 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         {
             var modeloDoc = ModeloDocumento(modelo);
             var docProc = pelaChave ? DocumentoProtocolo.Chave : DocumentoProtocolo.Xml;
-            var n2 = new ServConsProtNfe4(EmissorConfig, X509Certificate2, documento, VersaoServico.Ve400, docProc, modeloDoc);
+            var n2 = new ServConsProtNfe4(EmissorConfig, X509Certificate2,
+                documento, VersaoServico.Ve400, docProc, modeloDoc);
             return n2.Executar();
         }
 
@@ -140,14 +143,16 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         public IRetConsRec ConsultarPeloRecibo(string numRecibo, string modelo)
         {
             var modeloDoc = ModeloDocumento(modelo);
-            var n2 = new ServConsRecNfe4(EmissorConfig, X509Certificate2, numRecibo, VersaoServico.Ve400, modeloDoc);
+            var n2 = new ServConsRecNfe4(EmissorConfig, X509Certificate2,
+                numRecibo, VersaoServico.Ve400, modeloDoc);
             return n2.Executar();
         }
 
         private static ModeloDocumento ModeloDocumento(string modelo)
         {
-            if (modelo != "55" && modelo != "65") throw new FalhaValidacaoException("Os modelos válidos são 55 ou 65");
-            var modeloDoc = (ModeloDocumento) Enum.Parse(typeof(ModeloDocumento), modelo);
+            if (modelo != "55" && modelo != "65")
+                throw new FalhaValidacaoException("Os modelos válidos são 55 ou 65");
+            var modeloDoc = (ModeloDocumento)Enum.Parse(typeof(ModeloDocumento), modelo);
             return modeloDoc;
         }
 
@@ -158,10 +163,13 @@ namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
         /// <param name="eventoBuilders">Dados do evento cancelar uma NFe</param>
         /// <param name="modelo">Modelo do documento 55 ou 65</param>
         /// <returns></returns>
-        public IRetCancelar CancelarNFe(int idlote, ICollection<EventoBuilder> eventoBuilders, string modelo)
+        public IRetCancelar CancelarNFe(int idlote,
+            ICollection<EventoBuilder> eventoBuilders, string modelo)
         {
             var modeloDoc = ModeloDocumento(modelo);
-            var n2 = new ServCancNfe4(EmissorConfig, X509Certificate2,idlote,eventoBuilders,VersaoServico.Ve100, modeloDoc);
+            var n2 = new ServCancNfe4(EmissorConfig,
+                X509Certificate2, idlote, eventoBuilders,
+                VersaoServico.Ve100, modeloDoc);
             return n2.Executar();
         }
 

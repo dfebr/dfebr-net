@@ -43,7 +43,8 @@ namespace DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Evento
         #endregion
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
-        public EventoBuilder(int seqEvento, string protAutorizacao, string chaveNFe, string justificativa, string cpfcnpj)
+        public EventoBuilder(int seqEvento, string protAutorizacao,
+            string chaveNFe, string justificativa, string cpfcnpj)
         {
             SeqEvento = seqEvento;
             ProtAutorizacao = protAutorizacao;

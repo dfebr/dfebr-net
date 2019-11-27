@@ -7,7 +7,7 @@ namespace DFeBR.EmissorNFe.Builders.Destinatario
         /// <summary>
         /// Destinatário para NFe v4.0
         /// </summary>
-        public DestinatarioNFe40(Configurar config, string cnpj, string cpf, string idEstrangeiro, string nome, indIEDest indIeDest, string ie,
+        public DestinatarioNFe40(string cnpj, string cpf, string idEstrangeiro, string nome, indIEDest indIeDest, string ie,
                 string isuf, string im, string email)
         {
             SetDestinatario(new dest()

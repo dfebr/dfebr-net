@@ -77,8 +77,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
 
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retConsSitNFe", resposta);
-            var retorno1 = Utils.XmlStringParaClasse<retConsSitNFe>(node);
-            var xmlEnviado = Utils.ClasseParaXmlString(d1);
+            var retorno1 = Utils.ConverterXMLParaClasse<retConsSitNFe>(node);
+            var xmlEnviado = Utils.ObterStringXML(d1);
             _processadas++;
             if (retorno1.protNFe == null) _rejeitadas++;
             if (retorno1.protNFe != null)
@@ -168,7 +168,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
                 throw new InvalidOperationException("Informe um diretório válido.");
             var nomeArq = $"{entity.chNFe}-ped-sit.xml";
             var caminho = Path.Combine(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml, "Protocolos", "Enviados");
-            var xml = Utils.ClasseParaXmlString(entity);
+            var xml = Utils.ObterStringXML(entity);
             Utils.EscreverArquivo(caminho, nomeArq, xml);
         }
 
@@ -183,7 +183,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
                 throw new InvalidOperationException("Informe um diretório válido.");
             var nomeArq = $"{_chaveNfe}-sit.xml";
             var caminho = Path.Combine(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml, "Protocolos", "Recebidos");
-            var xml = Utils.ClasseParaXmlString(entity);
+            var xml = Utils.ObterStringXML(entity);
             Utils.EscreverArquivo(caminho, nomeArq, entity.XmlRecebido);
         }
 
@@ -236,7 +236,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// <returns></returns>
         protected virtual string ObterCorpoMensagemSoap(string urlWsdl, consSitNFe entity)
         {
-            var xmlCorpo = Utils.ClasseParaXmlString(entity);
+            var xmlCorpo = Utils.ObterStringXML(entity);
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
             stringBuilder.Append(
@@ -264,7 +264,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var list = ObterListaNomeSchemas().ToList();
             list.ForEach(n => { cfg.Schemas.Add(null, Path.Combine(caminhoSchema, n)); });
             cfg.ValidationEventHandler += ValidationEventHandler;
-            var xml = Utils.ClasseParaXmlString(entity);
+            var xml = Utils.ObterStringXML(entity);
             var reader = XmlReader.Create(new StringReader(xml), cfg);
             var document = new XmlDocument();
             document.Load(reader);
