@@ -194,7 +194,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var list = ObterListaNomeSchemas().ToList();
             list.ForEach(n => { cfg.Schemas.Add(null, Path.Combine(caminhoSchema, n)); });
             cfg.ValidationEventHandler += ValidationEventHandler;
-            var xml = Utils.ClasseParaXmlString(entity);
+            var xml = Utils.ObterStringXML(entity);
             var reader = XmlReader.Create(new StringReader(xml), cfg);
             var document = new XmlDocument();
             document.Load(reader);
@@ -219,7 +219,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// <returns></returns>
         protected virtual string ObterCorpoMensagemSoap(string urlWsdl, consStatServ entity)
         {
-            var xmlCorpo = Utils.ClasseParaXmlString(entity);
+            var xmlCorpo = Utils.ObterStringXML(entity);
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
             stringBuilder.Append(
@@ -255,8 +255,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
 
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retConsStatServ", resposta);
-            var retorno1 = Utils.XmlStringParaClasse<retConsStatServ>(node);
-            var xmlEnviado = Utils.ClasseParaXmlString(d1);
+            var retorno1 = Utils.ConverterXMLParaClasse<retConsStatServ>(node);
+            var xmlEnviado = Utils.ObterStringXML(d1);
             _processadas++;
             if (StatusSefaz.ListarCodigo.All(n => n.Key != retorno1.cStat)) _rejeitadas++;
             var retorno2 = new RetConsStat(retorno1, node, _processadas, _rejeitadas, xmlEnviado);

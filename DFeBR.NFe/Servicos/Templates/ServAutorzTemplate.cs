@@ -241,7 +241,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         {
             if (!string.IsNullOrWhiteSpace(_xmlNfe))
             {
-                var d0 = Utils.XmlStringParaClasse<NFe>(_xmlNfe);
+                var d0 = Utils.ConverterXMLParaClasse<NFe>(_xmlNfe);
                 return new enviNFe(_versao.ObterVersaoServico(), _idlote, _emisorEmissorServicoConfig.IndicadorSincronizacao,
                         new List<NFe> {d0});
             }
@@ -263,13 +263,13 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         private RetAutorz RetornoProcessamento(string xmlRecebido, enviNFe enviNFe, bool contingencia)
         {
             var node = Utils.ObterNodeDeStringXml("retEnviNFe", xmlRecebido);
-            var retorno1 = Utils.XmlStringParaClasse<retEnviNFe>(node);
+            var retorno1 = Utils.ConverterXMLParaClasse<retEnviNFe>(node);
             _processadas++;
             if (retorno1.protNFe == null) _rejeitadas++;
             if(retorno1.protNFe!=null)
             if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.All(m=>m.cStat!=n.Key))) _rejeitadas++;
            
-            var xmlEnviado = Utils.ClasseParaXmlString(enviNFe.NFe);
+            var xmlEnviado = Utils.ObterStringXML(enviNFe.NFe);
             var retorno2 = new RetAutorz(retorno1, xmlRecebido, _processadas, _rejeitadas, xmlEnviado, contingencia);
             SalvarArquivoLoteRecebidos(retorno2);
               
@@ -352,7 +352,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var list = ObterListaNomeSchemas().ToList();
             list.ForEach(n => { cfg.Schemas.Add(null, Path.Combine(caminhoSchema, n)); });
             cfg.ValidationEventHandler += ValidationEventHandler;
-            var xml = Utils.ClasseParaXmlString(entity);
+            var xml = Utils.ObterStringXML(entity);
             var reader = XmlReader.Create(new StringReader(xml), cfg);
             var document = new XmlDocument();
             document.Load(reader);
@@ -404,7 +404,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// <returns></returns>
         protected virtual string ObterCorpoMensagemSoap(string urlWsdl, enviNFe entity)
         {
-            var xmlCorpo = Utils.ClasseParaXmlString(entity);
+            var xmlCorpo = Utils.ObterStringXML(entity);
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
             stringBuilder.Append(

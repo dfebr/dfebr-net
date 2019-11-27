@@ -14,6 +14,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using DFeBR.EmissorNFe.Builders;
+using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Evento;
 
@@ -50,7 +51,7 @@ namespace DFeBR.EmissorNFe.Servicos.Interfaces
         /// <param name="nFeBuilder">Builder NFe</param>
         /// <param name="compactarMensagem">Define se a mensagem será enviada para a SEFAZ compactada</param>
         /// <returns></returns>
-        IRetAutorz Autorizar(int idLote, List<NFeBuilder> nFeBuilder, bool compactarMensagem);
+        IRetAutorz Autorizar(int idLote, List<NFe> nFeBuilder, bool compactarMensagem);
 
         /// <summary>
         ///     Solicita autorização de uma NFe
@@ -58,7 +59,8 @@ namespace DFeBR.EmissorNFe.Servicos.Interfaces
         /// <param name="xmlNFe">Uma string Xml Nfe </param>
         /// <param name="compactarMensagem">Define se a mensagem será enviada para a SEFAZ compactada</param>
         /// <returns></returns>
-        IRetAutorz Autorizar(string xmlNFe, bool compactarMensagem = false);
+        IRetAutorz Autorizar(NFe nfeBuilder, bool compactarMensagem = false);
+
 
         /// <summary>
         ///     Inutilizar número de nota

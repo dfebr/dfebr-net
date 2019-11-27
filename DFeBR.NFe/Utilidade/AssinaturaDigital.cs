@@ -45,7 +45,7 @@ namespace DFeBR.EmissorNFe.Utilidade
                 if (id == null)
                     throw new Exception("Não é possível assinar um objeto evento sem sua respectiva Id!");
                 var documento = new XmlDocument {PreserveWhitespace = true};
-                documento.LoadXml(Utils.ClasseParaXmlString(objetoLocal));
+                documento.LoadXml(Utils.ObterStringXML(objetoLocal));
                 var docXml = new SignedXml(documento) {SigningKey = certificado.PrivateKey};
                 docXml.SignedInfo.SignatureMethod = metodoAssinatura;
                 var reference = new Reference {Uri = "#" + id, DigestMethod = metodoDigest};
@@ -65,7 +65,7 @@ namespace DFeBR.EmissorNFe.Utilidade
 
                 //// recuperando a representacao do XML assinado
                 var xmlDigitalSignature = docXml.GetXml();
-                var assinatura = Utils.XmlStringParaClasse<Signature>(xmlDigitalSignature.OuterXml);
+                var assinatura = Utils.ConverterXMLParaClasse<Signature>(xmlDigitalSignature.OuterXml);
                 return assinatura;
             }
             catch (Exception ex)
