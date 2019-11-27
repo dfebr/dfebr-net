@@ -2,9 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Valnei Batista Filho, Marco Polo Viana</Authors>
+    <Authors>Valnei Batista Filho, Marco Polo Viana, Marcos Vinícius</Authors>
     <Product>EmissorNFe</Product>
-    <Description>Emissor de Notas Fiscais Eletrônica</Description>
+    <Description>Novo framework para emissão e logística de documentos fiscais para a plataforma .NET, compatível com .NET Core e .NET 4.x</Description>
+    <Version>0.0.1</Version>
+    <PackageLicenseUrl>https://github.com/dfebr/dfebr-net</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/dfebr/dfebr-net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dfebr/dfebr-net</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>DFeBR</PackageTags>
+    <PackageReleaseNotes>Primeiro BETA Publico</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIconUrl>https://github.com/dfebr/dfebr-net/blob/master/Logo-DFeBr.png?raw=true</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
