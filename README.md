@@ -28,7 +28,7 @@ Ex.:
 
 **Configuração do framework**
 
-A configuração do framework é feita através da classe "EmissorServicoConfig". Nos pontos onde se vê **...** são parâmetros de métodos.
+A configuração do framework é feita através da classe "EmissorServicoConfig". Nos pontos onde se vê **"..."** são parâmetros de métodos.
 ```C#
    private EmissorServicoConfig GetConfig()
    {
