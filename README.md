@@ -92,9 +92,13 @@ O novo projeto conta com uma equipe seleta de experientes desenvolvedores da pla
 A equipe está organizada por áreas de projeto, cujo elas são: 
 
 **“Core-Framework”** - Camada de mais baixo nível do projeto, responsável por de fato fazer todo o processo de transmissão de documentos e manipulação de XML’s 
+
 **“Support-Layers”** - Camada de mais alto nível do projeto, responsável por interagir direta/indiretamente com o desenvolvedor-usuário, afim de garantir que todas as informações que chegarem no “Core-Framework” estejam devidamente tratadas e válidas. 
+
 **“Code Revisor”** - Membros do projeto responsáveis pela revisão de código enviado pela comunidade a fim de contribuir com o projeto. 
+
 **“Suporte Fiscal e Regras de Negócio”** - Membros do projeto responsáveis por estar antenados as legislações fiscais e orquestrar a correta implementação das evoluções mais recentes estabelecidas pelas Sefaz’es. 
+
 
 Os membros são: 
 
