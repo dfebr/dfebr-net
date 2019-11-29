@@ -314,7 +314,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var dadosChave = Utils.ObterChave(estado, dataEHoraEmissao.LocalDateTime, cnpj, modeloDocumentoFiscal, serie, numeroDocumento,
                     tipoEmissao, codigoNumerico);
             entity.infNFe.Id = "NFe" + dadosChave.Chave;
-            entity.infNFe.ide.cDV = Convert.ToInt16(dadosChave.DigitoVerificador);
+            entity.infNFe.ide.cDV = Convert.ToInt32(dadosChave.DigitoVerificador);
         }
 
         /// <summary>

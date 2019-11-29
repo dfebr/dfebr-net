@@ -54,7 +54,7 @@ namespace DFeBR.EmissorNFe.Utilidade
             var ambiente = (int) nfe.infNFe.ide.tpAmb;
 
             //Identificador do CSC (Código de Segurança do Contribuinte no Banco de Dados da SEFAZ). Informar sem os zeros não significativos
-            var idCsc = Convert.ToInt16(cIdToken);
+            var idCsc = Convert.ToInt32(cIdToken);
             string dadosBase;
             if (nfe.infNFe.ide.tpEmis == TipoEmissao.ContingenciaOffLineNfce)
             {
