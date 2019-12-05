@@ -227,28 +227,28 @@ namespace DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar
         /// <summary>
         ///     Configuração do certificado A3 (cartão)
         /// </summary>
-        /// <param name="senha">Senha do certificado</param>
+        /// <param name="serial">Serial do certificado</param>
         /// <param name="signatureMethodSignedXML">Algoritmo de Assinatura</param>
         /// <param name="digestMethodReference">URI para DigestMethod na Classe Reference para auxiliar para a assinatura</param>
-        public void ConfiguraCertificadoA3(string senha, string signatureMethodSignedXML = "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        public void ConfiguraCertificadoA3(string serial, string signatureMethodSignedXML = "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
                 string digestMethodReference = "http://www.w3.org/2000/09/xmldsig#sha1")
         {
             if (Certificado != null)
                 throw new FalhaValidacaoException("O certificado já foi configurado previamente");
-            if (string.IsNullOrEmpty(senha))
-                throw new FalhaCertificadoDigitalException("Senha não informada");
+            if (string.IsNullOrEmpty(serial))
+                throw new FalhaCertificadoDigitalException("Serial não informado");
             Certificado = new CertificadoConfig
             {
-                    TipoCertificado = TipoCertificado.A3,
-                    Senha = senha,
-                    DigestMethodReference = digestMethodReference,
-                    SignatureMethodSignedXml = signatureMethodSignedXML
+                TipoCertificado = TipoCertificado.A3,
+                Serial = serial,
+                DigestMethodReference = digestMethodReference,
+                SignatureMethodSignedXml = signatureMethodSignedXML
             };
         }
 
         #endregion
 
-        
+
 
         /// <summary>
         ///     Versao do serviço
