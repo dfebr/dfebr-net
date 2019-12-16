@@ -37,8 +37,9 @@ namespace DFeBR.EmissorNFe.Builders
         public NFeBuilder(EmissorServicoConfig emissorServicoConfig)
         {
             NFe = new NFe();
-            NFe.infNFe.total = new Dominio.NotaFiscalEletronica.Informacoes.Total.total();
             NFe.infNFe = new infNFe();
+            NFe.infNFe.total = new Dominio.NotaFiscalEletronica.Informacoes.Total.total();
+
             NFe.infNFe.emit = emissorServicoConfig.Emitente;
         }
 
