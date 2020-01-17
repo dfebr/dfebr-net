@@ -225,10 +225,13 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         private IRetAutorz ProcessarEnvioMensagem(enviNFe d1)
         {
             var soapXml = ObterCorpoMensagemSoap(_urlWsdlServico, d1);
-            SalvarArquivoLoteEnviado(soapXml);
+
+            var xmlEnvioTratado = Utils.ObterNodeDeStringXml("enviNFe", soapXml);
+            SalvarArquivoLoteEnviado(xmlEnvioTratado);
+
             var ws = _servicoBase.ObterRequisicaoSoap(_urlServico, soapXml);
-             var resposta = _servicoBase.ObterResposta(ws);
-               if (string.IsNullOrWhiteSpace(resposta))
+            var resposta = _servicoBase.ObterResposta(ws);
+            if (string.IsNullOrWhiteSpace(resposta))
                 throw new InvalidOperationException("Não foi possível obter resposta a chamada do serviço");
             return RetornoProcessamento(resposta, d1, _contingencia);
         }
@@ -260,19 +263,23 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// <param name="enviNFe"></param>
         /// <param name="contingencia">True, enviado em contingência</param>
         /// <returns></returns>
+
+
         private RetAutorz RetornoProcessamento(string xmlRecebido, enviNFe enviNFe, bool contingencia)
         {
-            var node = Utils.ObterNodeDeStringXml("retEnviNFe", xmlRecebido);
-            var retorno1 = Utils.ConverterXMLParaClasse<retEnviNFe>(node);
+            var xmlRecebidoTratado = Utils.ObterNodeDeStringXml("retEnviNFe", xmlRecebido);
+            var retorno1 = Utils.ConverterXMLParaClasse<retEnviNFe>(xmlRecebidoTratado);
             _processadas++;
-            if (retorno1.protNFe == null) _rejeitadas++;
-            if(retorno1.protNFe!=null)
-            if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.All(m=>m.cStat!=n.Key))) _rejeitadas++;
-           
-            var xmlEnviado = Utils.ObterStringXML(enviNFe.NFe);
-            var retorno2 = new RetAutorz(retorno1, xmlRecebido, _processadas, _rejeitadas, xmlEnviado, contingencia);
+            if (retorno1.protNFe == null)
+                _rejeitadas++;
+            if (retorno1.protNFe != null)
+                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.All(m => m.cStat != n.Key)))
+                    _rejeitadas++;
+
+            var xmlEnviado = Utils.ObterStringXML(enviNFe);
+            var retorno2 = new RetAutorz(retorno1, xmlRecebidoTratado, _processadas, _rejeitadas, xmlEnviado, contingencia);
             SalvarArquivoLoteRecebidos(retorno2);
-              
+
             return retorno2;
         }
 

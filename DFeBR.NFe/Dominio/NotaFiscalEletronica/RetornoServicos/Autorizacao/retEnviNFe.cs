@@ -56,7 +56,15 @@ namespace DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Autoriza
         /// <summary>
         ///     AR06a - Código da UF que atendeu a solicitação.
         /// </summary>
-        public Estado cUF { get; set; }
+        [XmlIgnore]
+        public Estado? cUF { get; set; }
+
+        [XmlAttribute("cUF")]
+        public Estado _cUF
+        {
+            get { return cUF.Value; }
+            set { cUF = value; }
+        }
 
         /// <summary>
         ///     AR06b - Data e Hora do Recebimento Formato = AAAA-MM-DDTHH:MM:SS Preenchido com data e hora do recebimento do lote.
