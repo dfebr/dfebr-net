@@ -61,6 +61,13 @@ namespace DFeBR.EmissorNFe.Servicos.Interfaces
         /// <returns></returns>
         IRetAutorz Autorizar(NFe nfeBuilder, bool compactarMensagem = false);
 
+        /// <summary>
+        ///     Solicita autorização de uma NFe
+        /// </summary>
+        /// <param name="xmlNFe">Uma string Xml</param>
+        /// <param name="compactarMensagem">Define se a mensagem será enviada para a SEFAZ compactada</param>
+        /// <returns></returns>
+        IRetAutorz Autorizar(string xmlNFe, bool compactarMensagem = false);
 
         /// <summary>
         ///     Inutilizar número de nota

@@ -17,18 +17,18 @@
         /// <summary>
         /// Quantidade do produto
         /// </summary>
-        public double Quantidade { get; set; }
+        public decimal Quantidade { get; set; }
         /// <summary>
         /// Valor unitário do produto
         /// </summary>
-        public double ValorUnitario { get; set; }
+        public decimal ValorUnitario { get; set; }
         /// <summary>
         /// Valor total do produto 
         /// </summary>
-        public double ValorTotal { get; set; }
+        public decimal ValorTotal { get; set; }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
-        public ProdutoNFCe(string codigo, string descricao, string unidade, double quantidade, double valorUnitario, double valorTotal)
+        public ProdutoNFCe(string codigo, string descricao, string unidade, decimal quantidade, decimal valorUnitario, decimal valorTotal)
         {
             Codigo = codigo;
             Descricao = descricao;

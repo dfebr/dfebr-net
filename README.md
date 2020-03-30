@@ -66,6 +66,12 @@ Ex.:
 Segundo as dicas acima, você deve construir seus objetos para confecção da NFe e informá-los na classe "NFeBuilder", e por fim, submetê-la ao serviço de autorização
 
 ```C#
+
+  private IServicoStrategy ObterServico()
+  {
+		return new ServNFe4(GetConfig());
+  }
+
   public void EmitirNFeComBuilder()
   {
       NFeBuilder builder = new NFeBuilder(GetConfig());
@@ -78,7 +84,7 @@ Segundo as dicas acima, você deve construir seus objetos para confecção da NF
       builder.AddPagamento(GetPagamento());
       builder.SetResponsavel(new ResponsavelTecNFe40(....));
 
-      var servNfe = new ServNFe4(GetConfig());
+      var servNfe = ObterServico();
       IRetAutorz retorno = servNfe.Autorizar(builder.NFe);
   }
 ```

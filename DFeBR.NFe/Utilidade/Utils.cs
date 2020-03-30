@@ -185,29 +185,74 @@ namespace DFeBR.EmissorNFe.Utilidade
                 return "";
             }
         }
+
+
         /// <summary>
         /// Formatar numero
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string FormatarNumero(this double value)
+        public static string FormatarNumero(this decimal value)
         {
             return $"{(object)value:0.00}".Replace(",", ".").Trim();
         }
 
         /// <summary>
-        /// Formatar numero para exibição da DANFE
+        /// Formatar CNPJ ou CPF
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="doc"></param>
         /// <returns></returns>
-        public static string FormatarNumeroDanfe(this double value)
+        public static string FormatarCnpjCpf(string doc)
         {
-            var str = FormatarNumero(value);
-            str = str.Replace(".", ",");
-            double result = 0.0;
-            double.TryParse(str, out result);
-            return result.ToString("C");
+            if (string.IsNullOrEmpty(doc))
+                return doc;
+            string empty = string.Empty;
+            if (doc.Trim().Length < 12)
+            {
+                doc = doc.Trim();
+                return Regex.Replace(doc, "(\\w{3})(\\w{3})(\\w{3})(\\w{2})", "$1.$2.$3-$4");
+            }
+            doc = doc.Trim();
+            return Regex.Replace(doc, "(\\w{2})(\\w{3})(\\w{3})(\\w{4})(\\w{2})", "$1.$2.$3/$4-$5");
+
         }
+
+        /// <summary>
+        ///     Trunca string
+        /// </summary>
+        /// <param name="value">string</param>
+        /// <param name="maxLength">Quantidade máxima de caracteres para exibição</param>
+        /// <returns></returns>
+        public static string Truncar(this string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="lengthAfterSpace"></param>
+        /// <returns></returns>
+        public static string FormatarEspaco(this string text, int lengthAfterSpace)
+        {
+            string empty = string.Empty;
+            int num = 1;
+            foreach (char ch in text)
+            {
+                empty += ch.ToString();
+                if (num == lengthAfterSpace)
+                {
+                    empty += " ";
+                    num = 1;
+                }
+                else
+                    ++num;
+            }
+            return empty.Trim();
+        }
+
         /// <summary>
         ///     Obtém uma string Hexadecimal de uma string passada no parâmetro
         /// </summary>
@@ -938,7 +983,33 @@ namespace DFeBR.EmissorNFe.Utilidade
         #endregion
 
         #region String
+        /// <summary>
+        /// Formatar numero para exibição da DANFE
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string FormatarNumeroDanfe(this decimal value)
+        {
+            var str = FormatarNumero(value);
+            str = str.Replace(".", ",");
+            double result = 0.0;
+            double.TryParse(str, out result);
+            return result.ToString("C");
+        }
 
+        /// <summary>
+        /// Formatar numero para exibição da DANFE
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string FormatarNumeroQuantidadeDanfe(this decimal value)
+        {
+            var str = FormatarNumero(value);
+            str = str.Replace(".", ",");
+            double result = 0.0;
+            double.TryParse(str, out result);
+            return result.ToString("#.000").Trim();
+        }
         public static string RemoverAcentos(this string valor)
         {
             if (string.IsNullOrEmpty(valor))

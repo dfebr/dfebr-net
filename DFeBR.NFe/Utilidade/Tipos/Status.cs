@@ -21,6 +21,7 @@ namespace DFeBR.EmissorNFe.Utilidade.Tipos
 {
         public enum Status
     {
+        Contingencia,
         Autorizada,
         Cancelada,
         NaoAuotorizada,

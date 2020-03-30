@@ -75,7 +75,8 @@ namespace DFeBR.EmissorNFe.Servicos
                 httpWebRequest.KeepAlive = true;
                 httpWebRequest.AllowAutoRedirect = true;
                 httpWebRequest.Timeout = _emissorServicoConfig.TimeOut;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                //https://docs.microsoft.com/pt-br/dotnet/api/system.net.servicepointmanager.securityprotocol?view=netframework-4.8
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 httpWebRequest.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
                 httpWebRequest.ContentLength = Encoding.UTF8.GetByteCount(soapXml);
                 var servico = ObterServicoAlvo(_urlServ); //Obter nome do serviço
