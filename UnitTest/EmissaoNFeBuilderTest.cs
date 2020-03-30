@@ -15,6 +15,8 @@ namespace UnitTest
 {
     public class EmissaoNFeBuilderTest
     {
+        /*
+         *  TO-DO
         private EmissorServicoConfig GetConfig()
         {
             var config = new EmissorServicoConfig(...);
@@ -77,5 +79,6 @@ namespace UnitTest
             var servNfe = new ServNFe4(GetConfig());
             IRetAutorz retorno = servNfe.Autorizar(builder.NFe);
         }
+        */
     }
 }
