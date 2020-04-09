@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        @page {
+            margin: 0;
+        }
+        @media print {
+            body {
+                margin: 0;
+            }
+        }
+        body {
+            font-family: 'Courier';
+            overflow: auto;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            display: flow-root;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        span {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0 5px 0 5px;
+            margin: 0;
+        }
+
+        .products-nfce{
+            font-size:11px !important;
+        }
+
+        .totals {
+            font-size: 12px !important;
+        }
+        
+        .totals > th {
+            padding-right:5px;
+        }
+
+        #corpo {
+            #cssBody#
+        }
+
+        #dadosemissor{
+            #cssDadosEmissor#
+        }
+
+        .bordaDivisora {
+            /*border: 1px black dashed;*/
+            border-bottom: none;
+            width: 99%;
+            padding: 5px 0 5px 0;
+        }
+
+            .bordaDivisora div {
+                margin-top: 2px;
+            }
+
+            .bordaDivisora table th, td {
+                text-align: center;
+                border-bottom: 1px gray dashed;
+                border-right: 1px gray dashed;
+            }
+
+        .content100 {
+            float: left;
+            width: 99.9%;
+            display: block;
+        }
+
+        .content80 {
+            float: left;
+            width: 79.9%;
+            display: block;
+        }
+
+        .content70 {
+            float: left;
+            width: 70%;
+            display: block;
+        }
+
+        .content55 {
+            float: left;
+            width: 55%;
+            display: block;
+        }
+
+        .content50 {
+            float: left;
+            width: 50%;
+            display: block;
+        }
+
+
+        #logo {
+            width: 18%;
+            margin-right: 2%;
+            margin-left: 1%;
+            height: 80px;
+            display: block;
+            float: left;
+        }
+
+        .produtosVendidos li {
+            float: left;
+            text-align: center;
+            border-bottom: 1px gray dashed;
+            border-right: 1px gray dashed;
+        }
+
+        #tabletotaisprodutos tr th {
+            border-bottom: none;
+            border-right: none;
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .marcaDaAgua {
+            position: absolute !important;
+            top: 48%;
+            width: auto;
+            font-size: 2.5em;
+            z-index: 5000;
+            opacity: 0.65 !important;
+            filter: alpha(opacity=65) !important;
+            -moz-opacity: 0.65 !important; /* Safari */
+            -webkit-transform: rotate(-45deg); /* Opera */
+            -o-transform: rotate(-45deg); /* Firefox */
+            -moz-transform: rotate(-45deg); /* Internet Explorer */
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="corpo">
+            #Header#
+            #Body#
+            #Footer#
+        </div>
+    </form>
+</body>
+</html>

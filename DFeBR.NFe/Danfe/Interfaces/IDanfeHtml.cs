@@ -9,6 +9,8 @@
 // ===================================================================
 
 
+using DFeBR.EmissorNFe.Danfe.Entidades;
+
 namespace DFeBR.EmissorNFe.Danfe.Interfaces
 {
     public interface IDanfeHtml

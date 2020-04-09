@@ -5,20 +5,20 @@
         /// <summary>
         ///     Valor total em impostos federais
         /// </summary>
-        public double ValorImpFederal { get; set; }
+        public decimal ValorImpFederal { get;}
 
         /// <summary>
         ///     Valor total em impostos estaduais
         /// </summary>
-        public double ValorImpEstadual { get; set; }
+        public decimal ValorImpEstadual { get; }
 
         /// <summary>
         ///     Valor total em impostos municipais
         /// </summary>
-        public double ValorImpMunicipal { get; set; }
+        public decimal ValorImpMunicipal { get;}
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
-        public ImpostosNFCe(double valorImpFederal, double valorImpEstadual, double valorImpMunicipal)
+        public ImpostosNFCe(decimal valorImpFederal, decimal valorImpEstadual, decimal valorImpMunicipal)
         {
             ValorImpFederal = valorImpFederal;
             ValorImpEstadual = valorImpEstadual;

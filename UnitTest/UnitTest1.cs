@@ -1,24 +1,12 @@
-﻿// ==================================================================
-// DFeBR - Documentos Fiscais Eletrônicos em .Net
-// Projeto: UnitTest
-// Autores: 
-// Valnei Filho  e-mail: vmarinpietri@yahoo.com.br por DSBR Brasil Tecnologia www.DSBRBRASIL.com.br;
-// Marco Polo  e-mail: marcopoloviana@hotmail.com 
-// Data Criação:21/05/2019
-// Todos os direitos reservados
-// ===================================================================
-
-
-#region
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using DFeBR.EmissorNFe;
-using DFeBR.EmissorNFe.Builders;
+using DFeBR.EmissorNFe.Danfe;
 using DFeBR.EmissorNFe.Danfe.Entidades;
 using DFeBR.EmissorNFe.Danfe.Interfaces;
-using DFeBR.EmissorNFe.Danfe.NFCe;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Configurar;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Emitente;
 using DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Autorizacao;
@@ -52,18 +40,107 @@ namespace UnitTest
             c1.ConfiguraCertificadoA1Repositorio(serial);
             //Segurança para nao transmitir em produção
             if (c1.Ambiente == TipoAmbiente.Producao) throw new Exception("Testes em produção não permitido.");
-            return c1;
+            return c1; 
+        }
 
-            //var serial = "‎1A81F7AE101714929D230EC688A4BA7F";
-            //var senha = "1234";
-            //var c1 = new EmissorServicoConfig(VersaoServico.Ve400, Estado.Ba, TipoAmbiente.Homologacao);
-            //c1.ConfiguraCSC("000001", "58C851CA-C1C7-413C-BBDB-3EC38CF5F39F");
-            //c1.ConfiguraEmitente("13712048000174", "", "Nome", "Fantasia", "018738210", "", "", "", CRT.SimplesNacional, "logradouro", "1",
-            //        "", "Bairro", 41620500, "Municipio", "BA", "41620500", null);
-            //c1.ConfiguraSchemaXSD(true, $@"{Environment.CurrentDirectory}\Entidades\Schemas\versao4.00");
-            //c1.ConfiguraArquivoRetorno(true, @"D:\");
-            //c1.ConfiguraCertificadoA1Repositorio(serial);
-            //return c1;
+        /// <summary>
+        ///     Gerar DANFE no diretorio D
+        /// </summary>
+        /// <param name="qtdProdutos"></param>
+        /// <param name="nomeArquivo"></param>
+        private void GerarDanfe55(int qtdProdutos, string nomeArquivo)
+        {
+
+            #region Destinatario
+
+            var endereco = new Endereco("Travessa Itacemirim", "Hortolância", "São paulo", "3", "4855966", "SP", "", "São Paulo");
+            var destinatario = new Destinatario("Valnei Batista Filho", "89852632321", "88541222", endereco);
+
+            #endregion
+
+            #region Emitente
+
+            var emitente = new Emitente("Luiz Queizos Damasceno", "9995682323", "88544412241", "", endereco);
+
+            #endregion
+
+            #region Transportadora
+
+            var transportadora = new Transportadora(endereco, "88562265232", "Transportadora XYZ", "JOL85622", "44512", "541110", "",
+                    "Emitente");
+
+            #endregion
+
+            #region Faturas
+
+            var faturas = new List<Fatura>
+            {
+                    new Fatura("5", DateTime.Now, 85.5m),
+                    new Fatura("5", DateTime.Now, 85.5m),
+                    new Fatura("5", DateTime.Now, 85.5m),
+                    new Fatura("5", DateTime.Now, 85.5m),
+                    new Fatura("5", DateTime.Now, 85.5m),
+                    new Fatura("5", DateTime.Now, 85.5m)
+            };
+
+            #endregion
+
+            #region Imposto
+
+            var imposto = new Imposto
+            {
+                    ValorTotNota = 56.5m,
+                    BaseCalcIcmsSt = 52,
+                    Outros = 1,
+                    ValorFrete = 21.6m,
+                    ValorIcms = 52,
+                    ValorIcmsSt = 55,
+                    ValorSeg = 55,
+                    ValorTotProd = 852
+            };
+
+            #endregion
+
+            #region Produtos
+
+            var prods = new List<Produto>();
+            for (var i = 0; i < qtdProdutos; i++)
+                prods.Add(new Produto(i.ToString(), $"Produto A{i.ToString()}", "Informações Adiconais ao produto", "UND", 5, 85.36m, 5541,
+                        "55212", "02512", "0", 85, 52, 74, 4));
+
+            #endregion
+
+            #region Volume
+
+            var vols = new List<Volume>();
+            vols.Add(new Volume
+            {
+                    Especie = "especie",
+                    Marca = "Marca",
+                    PesoBruto = 52.6m,
+                    PesoLiq = 5,
+                    Quantidade = "5"
+            });
+
+            #endregion
+
+            #region Inf Adicionais
+
+            var inf = new InfAdic
+            {
+                    InfComplementares = "Informações Complementares",
+                    InfFisco =
+                            "Inf. Contribuinte: As mercadorias serao retiradas no DEPOSITO FECHADO localizado na Rod Francisco Aguirre Proenca-KM -5,5 -Insc Est:748094873111 CNPJ:07.721.579 / 0009 - 88 IMPOSTO RECOLHIDO POR SUBSTITUICAO TRIBUTARIA - ART. 313 DO RICMS - SP REDUCAO NA BASE DE 33,rio: notafiscal.rodrigues @gmail.com"
+            };
+
+            #endregion
+
+            var nfe = new DanfeNFe(destinatario, emitente, "29190417784038000103650980000000011000000014", 523.3m, "8554545", "2",
+                    Status.EsperandoAutorizacao, "0", "552121", "Venda de Mercadoria", "55212121", DateTime.Now, DateTime.Now, faturas,
+                    imposto, transportadora, vols, prods, null, inf, "Emissor Fiscal DSBR Brasil - www.dsbrbrasil.com.br");
+            IDanfeHtml d1 = new DanfeNFeHtml(nfe);
+            var doc = d1.ObterDocHtml();
+            Utils.EscreverArquivo("D:\\", nomeArquivo, doc.Html);
         }
 
         [Fact]
@@ -126,39 +203,87 @@ namespace UnitTest
         }
 
         [Fact]
-        [Description("Verificar criação da DANFE Emissão Normal")]
-        public void ObterDanfe()
+        [Description("Verificar criação da DANFE Emissão Normal NFCe")]
+        public void ObterDanfeNFCeModelo65()
         {
             var c1 = ObterConfiguracao();
-            var cabecalho = new CabecalhoNFCe("Empresa DSBR BRasil", "32806205000155", "155731233", "10", "Rua Itacimirim loja 22",
-                    "São Paulo", "SP", "40620500");
-            var dest = new DestinatarioNFCe("", "", "");
-            var pagamento = new PagamentoNFCe(120, 120, 120, 0.5,
-                    new List<FormPagNFCe> {new FormPagNFCe("Dinheiro", 120), new FormPagNFCe("Cartão Crédito", 23.56)});
+
+            #region Pagamento
+
+            var pagamento = new Pagamento(120, 120, 120, 0.5m,
+                    new List<FormPag> {new FormPag("Dinheiro", 120), new FormPag("Cartão Crédito", 23.56m)});
+
+            #endregion
+
+            #region Endereço
+
+            var endereco = new Endereco("Travessa Itacemirim", "Hortolância", "São paulo", "3", "4855966", "SP", "", "São Paulo");
+
+            #endregion
+
+            #region Destinatario
+
+            var dest = new Destinatario("Valnei Filho", "963523685", endereco);
+
+            #endregion
+
+            #region Impostos
+
+            var impostos = "Trib aprox R$: 13,41 Federal, 0,00 Estadual e Municipal: 0,00 Fonte: IBPT 801EC4";
+
+            #endregion
+
+            #region Produtos
+
             var produtos = new List<ProdutoNFCe>();
             for (var i = 0; i < 11; i++) produtos.Add(new ProdutoNFCe(i.ToString(), $"Produto {i}", "UND", i, i * 2, i * 3));
-            var impostos = new ImpostosNFCe(5, 6, 7);
-            var infAdc = new InfAdicNFCe("Informação");
-            var urlConsulta = c1.ConfigServ.UrlsNFce.Homologacao.QrcodeConsulta;
-            var corpo = new CorpoNFCe(false, "00000", Status.Autorizada, produtos, true, pagamento, impostos, infAdc, "1", DateTime.Now,
-                    urlConsulta, "29190417784038000103650980000000011000000014", dest);
+
+            #endregion
+
+            #region Emitente
+
+            var emitente = new Emitente("Luiz Queizos Damasceno", "8854511", "88544412241", "", endereco);
+
+            #endregion
+
+            #region QRCode
+
             var urlQrcode =
                     "http://hnfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx?p=29190517784038000103650980000000011000000026|2|2|1|b72d0c7a8a2d5bd267287215216be079669162a7";
-            var rodape = new RodapeNFCe("5512006230010", urlQrcode, "Emissor Fiscal DSBR Brasil - www.dsbrbrasil.com.br");
-            IDanfeHtml d1 = new DanfeNFCeHtml(TipoPapelNFCe.Mm80, cabecalho, corpo, rodape);
+
+            #endregion
+
+            var urlConsulta = c1.ConfigServ.UrlsNFce.Homologacao.QrcodeConsulta;
+            var danfeNFce = new DanfeNFCe(emitente, false, "5521212112", Status.Autorizada, produtos, true, pagamento, impostos,
+                    "Informações adicionais", "5", DateTime.Now, urlConsulta, "29190417784038000103650980000000011000000014", null,
+                    "55233213", urlQrcode, "Emissor Fiscal DSBR Brasil - www.dsbrbrasil.com.br");
+            IDanfeHtml d1 = new DanfeNFCeHtml(danfeNFce, TipoPapelNFCe.Mm80);
             var doc = d1.ObterDocHtml();
-            Utils.EscreverArquivo("D:\\", "NFce", doc.Html);
+            Utils.EscreverArquivo("D:\\", "NFce.htm", doc.Html);
+        }
+
+        [Fact]
+        [Description("Verificar criação da DANFE Emissão Normal NFe." +
+                     " O objetivo é verificar se as DANFES foram impressas corretamente")]
+        public void ObterDanfeNFeModelo55()
+        {
+            GerarDanfe55(20, "Nfe20.htm");
+            GerarDanfe55(1, "Nfe1.htm");
+            GerarDanfe55(25, "Nfe25.htm");
+            GerarDanfe55(101, "Nfe101.htm");
         }
 
         [Fact]
         [Description("Transmitir uma Nota Fiscal NFCe")]
         public void TransmitirNotaFiscal()
         {
-            var c1 = ObterConfiguracao();
-            var config = new Configurar(c1);
-            var servNfe = new ServNFe4(config.EmissorConfig);
-            var retorno = servNfe.Autorizar(1, new List<NFeBuilder>());
-            Assert.NotNull(retorno);
+            //var c1 = ObterConfiguracao();
+            //var config = new Configurar(c1);
+            //var servNfe = new ServNFe4(config.EmissorConfig);
+            //var retorno = servNfe.Autorizar(1, new List<NFeBuilder>());
+            //Assert.NotNull(retorno);
+            //TODO:Refazer teste de Transmissao de NFCe usando o builder
+            throw new NotImplementedException();
         }
 
 
@@ -236,7 +361,7 @@ namespace UnitTest
             var r1 = servNfe.Autorizar(xml);
 
             //Levantar uma exceção por conta do tipo de emissão ser numero 1, quando deveria ser 4,6 ou 7
-            //Assert.Throws<ArgumentOutOfRangeException>(() => servNfe.Autorizar(xml));
+            Assert.Throws<ArgumentOutOfRangeException>(() => servNfe.Autorizar(xml));
         }
 
 
@@ -300,7 +425,7 @@ namespace UnitTest
             var retorno = Utils.LerArquivo("Arquivos", "RetEnvieNFe.xml");
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retEnviNFe", retorno);
-            var retENviNFe = Utils.ConverterXMLParaClasse<retEnviNFe>(node);
+            var retENviNFe = node.ConverterXMLParaClasse<retEnviNFe>();
             var count = retENviNFe.protNFe.infProt.Count;
             Assert.Equal(3, count);
         }
@@ -313,7 +438,7 @@ namespace UnitTest
             var retorno = Utils.LerArquivo("Arquivos", "RetConsStatServ.xml");
             //Obter Node
             var node = Utils.ObterNodeDeStringXml("retConsStatServ", retorno);
-            var retConsNFe = Utils.ConverterXMLParaClasse<retConsStatServ>(node);
+            var retConsNFe = node.ConverterXMLParaClasse<retConsStatServ>();
             var codStatus = retConsNFe.cStat;
             Assert.Equal(107, codStatus);
         }
