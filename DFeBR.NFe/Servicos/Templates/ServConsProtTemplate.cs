@@ -80,9 +80,11 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var retorno1 = Utils.ConverterXMLParaClasse<retConsSitNFe>(node);
             var xmlEnviado = Utils.ObterStringXML(d1);
             _processadas++;
-            if (retorno1.protNFe == null) _rejeitadas++;
+            if (retorno1.protNFe == null)
+                _rejeitadas++;
             if (retorno1.protNFe != null)
-                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.All(m => m.cStat != n.Key))) _rejeitadas++; 
+                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.cStat != n.Key))
+                    _rejeitadas++;
 
             var retorno2 = new RetConsProt(retorno1, node, _processadas, _rejeitadas, xmlEnviado);
 
@@ -147,7 +149,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         protected ServConsProtTemplate(EmissorServicoConfig emissorServicoConfig, X509Certificate2 certificado, string documento,
                 DocumentoProtocolo doc, VersaoServico versao, ModeloDocumento modelo = ModeloDocumento.NFe)
         {
-            if (certificado == null) throw new ArgumentNullException(nameof(certificado));
+            if (certificado == null)
+                throw new ArgumentNullException(nameof(certificado));
             _emisorEmissorServicoConfig = emissorServicoConfig ?? throw new ArgumentNullException(nameof(emissorServicoConfig));
             _servicoBase = new ServHttpSoapBase(emissorServicoConfig, certificado,NomeServico);
             _chaveNfe = documento ?? throw new ArgumentNullException(nameof(documento));
@@ -162,7 +165,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarPedido(consSitNFe entity)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno)
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
@@ -177,7 +181,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarResposta(RetConsProt entity)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno)
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
@@ -198,7 +203,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             _chaveNfe = chave.RetirarLetras();
             var enitty = new consSitNFe
             {
-                    chNFe = _chaveNfe, tpAmb = _emisorEmissorServicoConfig.Ambiente, versao = _versao.ObterVersaoServico()
+                chNFe = _chaveNfe, tpAmb = _emisorEmissorServicoConfig.Ambiente, versao = _versao.ObterVersaoServico()
             };
             return enitty;
         }
