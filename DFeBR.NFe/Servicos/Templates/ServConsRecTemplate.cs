@@ -124,7 +124,10 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
             var nomeArq = $"{_numRecibo}-ped-rec.xml";
-            var caminho = Path.Combine(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml, "Recibos", "Enviados");            
+            var caminho = Path.Combine(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml, "Recibos", "Enviados");
+
+            var xml = System.IO.File.ReadAllText(caminho);
+            
             Utils.EscreverArquivo(caminho, nomeArq, xml);
         }
 
