@@ -21,7 +21,7 @@ using DFeBR.EmissorNFe.Utilidade.Tipos;
 
 namespace DFeBR.EmissorNFe.Servicos.VersaoNFe4
 {
-    internal class ServInutNfe4 : ServInutTemplate
+    public class ServInutNfe4 : ServInutTemplate
     {
         #region Construtor
 
