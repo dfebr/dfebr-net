@@ -1220,6 +1220,14 @@ namespace DFeBR.EmissorNFe.Utilidade
 
         #endregion
 
+        #region Estado/UF
+        public static Estado SiglaParaEstado(this string sigla)
+        {
+            var enumValues = Enum.GetValues(typeof(Estado)).Cast<Estado>().FirstOrDefault(e => e.ToString() == sigla);
+            return enumValues;
+        }
+        #endregion
+
         #region Enums
 
         /// <summary>
