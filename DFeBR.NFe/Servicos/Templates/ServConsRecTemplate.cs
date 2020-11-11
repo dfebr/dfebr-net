@@ -104,13 +104,6 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         private string _urlWsdlServico;
 
         /// <summary>
-        ///     String Xml bem formado contendo informações de uma NFe
-        /// </summary>
-        private readonly string _xmlNfe;
-
-        private readonly DocumentoProtocolo _documento;
-
-        /// <summary>
         ///     Versao do serviço
         /// </summary>
         private readonly VersaoServico _versao;
@@ -125,13 +118,16 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarPedido(consReciNFe entity)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno)
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
             var nomeArq = $"{_numRecibo}-ped-rec.xml";
             var caminho = Path.Combine(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml, "Recibos", "Enviados");
-            var xml = Utils.ObterStringXML(entity);
+
+            var xml = System.IO.File.ReadAllText(caminho);
+            
             Utils.EscreverArquivo(caminho, nomeArq, xml);
         }
 
@@ -140,7 +136,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarResposta(RetConsRec entity)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) 
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
@@ -272,7 +269,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// <returns></returns>
         public IRetConsRec Executar()
         {
-            if (_servicoBase == null) throw new InvalidOperationException("Uma instância do serviço base é requerido");
+            if (_servicoBase == null)
+                throw new InvalidOperationException("Uma instância do serviço base é requerido");
             if (_emisorEmissorServicoConfig == null)
                 throw new InvalidOperationException("Uma instância de configuração do emissor é requerido");
             _urlServico = ObterUrlServico();
@@ -290,9 +288,11 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             var retorno1 = Utils.ConverterXMLParaClasse<retConsReciNFe>(node);
             var xmlEnviado = Utils.ObterStringXML(d1);
             _processadas++;
-            if (retorno1.protNFe == null) _rejeitadas++;
+            if (retorno1.protNFe == null)
+                _rejeitadas++;
             if (retorno1.protNFe != null)
-                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.All(m=>m.infProt.All(k=>k.cStat!=n.Key)))) _rejeitadas++; 
+                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.All(m => m.infProt.cStat != n.Key)))
+                    _rejeitadas++; 
             var retorno2 = new RetConsRec(retorno1, node, _processadas, _rejeitadas, xmlEnviado);
 
             //Salvar arquivo

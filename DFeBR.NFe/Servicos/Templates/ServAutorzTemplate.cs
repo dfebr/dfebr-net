@@ -152,12 +152,14 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         private string ObterUrlContingencia(NFe entity)
         {
             //Tratar para ambiente de produção 
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
             _contingencia = true;
 
             //Sendo o modelo 65, entao continuar com o mesmo endereço
             var modelo = entity.infNFe.ide.mod;
-            if (modelo == ModeloDocumento.NfCe) return ObterUrlServicoNormal(entity);
+            if (modelo == ModeloDocumento.NfCe)
+                return ObterUrlServicoNormal(entity);
             //Sendo modelo 55, entao verificar o tipo de emissão escolhida
             var tpEmissao = entity.infNFe.ide.tpEmis;
             switch (tpEmissao)
@@ -186,7 +188,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             _contingencia = false;
             var tpEmissao = entity.infNFe.ide.tpEmis;
             //Obter uma url em contingencia por ter sido informado o tipo de emissão diferente de normal
-            if (tpEmissao != TipoEmissao.Normal) return ObterUrlContingencia(entity);
+            if (tpEmissao != TipoEmissao.Normal)
+                return ObterUrlContingencia(entity);
 
             //Obter uma url para um serviço de envio normal
             return ObterUrlServicoNormal(entity);
@@ -249,7 +252,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
                         new List<NFe> {d0});
             }
 
-            if (_nFes.Count == 0) throw new InvalidOperationException("Informe ao menos uma Nfe");
+            if (_nFes.Count == 0) 
+                throw new InvalidOperationException("Informe ao menos uma Nfe");
             var pedEnvio = new enviNFe(_versao.ObterVersaoServico(), _idlote, _emisorEmissorServicoConfig.IndicadorSincronizacao,
                     _nFes.ToList());
             return pedEnvio;
@@ -273,7 +277,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             if (retorno1.protNFe == null)
                 _rejeitadas++;
             if (retorno1.protNFe != null)
-                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.All(m => m.cStat != n.Key)))
+                if (StatusSefaz.ListarCodigo.All(n => retorno1.protNFe.infProt.cStat != n.Key))
                     _rejeitadas++;
 
             var xmlEnviado = Utils.ObterStringXML(enviNFe);
@@ -291,7 +295,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         private void GerarUrlQrCode(NFe entity)
         {
             //QRCode somente para modelo de documento NFCe
-            if (entity.infNFe.ide.mod != ModeloDocumento.NfCe) return;
+            if (entity.infNFe.ide.mod != ModeloDocumento.NfCe)
+                return;
             entity.infNFeSupl = new infNFeSupl();
             var urlQrCodeConsulta = ObterUrlQrCodeConsulta();
             var urlQrCodeChave = ObterUrlQrCodeChave();
@@ -439,7 +444,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarArquivoLoteEnviado(string resposta)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno)
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
@@ -453,7 +459,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
         /// </summary>
         private void SalvarArquivoLoteRecebidos(RetAutorz retornoNfeAutorizacao)
         {
-            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno) return;
+            if (!_emisorEmissorServicoConfig.SalvarArquivoRetorno)
+                return;
             //SalvarArquivo 
             if (string.IsNullOrWhiteSpace(_emisorEmissorServicoConfig.DiretorioArquivoRetornoXml))
                 throw new InvalidOperationException("Informe um diretório válido.");
@@ -496,7 +503,8 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
 
             //Danfe = "";
             var d1 = ObterDados();
-            if (d1 == null) throw new InvalidOperationException(nameof(d1));
+            if (d1 == null) 
+                throw new InvalidOperationException(nameof(d1));
             //Obtem a url do serviço,com base no modelo e ambiente do documento
             _urlServico = ObterUrlServico(d1.NFe[0]); //Obtem o 1º item da coleção
             _urlWsdlServico = ObterWsdlServico();

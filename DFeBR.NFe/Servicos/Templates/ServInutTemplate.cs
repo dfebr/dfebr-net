@@ -73,6 +73,7 @@ namespace DFeBR.EmissorNFe.Servicos.Templates
             _numeroFinal = numeroFinal;
             _justificativa = justificativa;
             _versao = versao;
+            _servicoBase = new ServHttpSoapBase(emissorServicoConfig, certificado, NomeServico);
         }
 
         #endregion
