@@ -326,7 +326,7 @@ namespace DFeBR.EmissorNFe.Danfe
             list.Add("#TotalValue#", entidade.Pagamento.ValorTotal.FormatarNumeroDanfe());
             list.Add("#TotalDiscount#", entidade.Pagamento.ValorTotDesconto.FormatarNumeroDanfe());
             list.Add("#TotalDue#", entidade.Pagamento.ValorTotDevido.FormatarNumeroDanfe());
-            list.Add("#ValorTroco#", entidade.Pagamento.Troco.Value.FormatarNumeroDanfe());
+            list.Add("#ValorTroco#", entidade.Pagamento.Troco == null ? string.Empty : entidade.Pagamento.Troco.Value.FormatarNumeroDanfe());
 
             if (entidade.Pagamento.Troco == null)
                 list.Add("#StyleTroco#", "style=\"display: none;\"");
@@ -374,9 +374,9 @@ namespace DFeBR.EmissorNFe.Danfe
                                         : "NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"
                         },
                         {"#Unit#", item.Unidade?.ToUpper()},
-                        {"#Quantity#", item.Quantidade.FormatarNumeroQuantidadeDanfe()},
-                        {"#UnityValue#", item.ValorUnitario.FormatarNumeroDanfe()},
-                        {"#Amount#", item.ValorTotal.FormatarNumeroDanfe()}
+                        {"#Quantity#", item.Quantidade.ToString("N3")}, // FormatarNumeroQuantidadeDanfe()},
+                        {"#UnityValue#", item.ValorUnitario.ToString("C")}, //FormatarNumeroDanfe()},
+                        {"#Amount#", item.ValorTotal.ToString("C")} //.FormatarNumeroDanfe()}
                 };
                 stringBuilder.Append(LerTemplateEsubstituirTags(Resources.Products_Mod65, dic));
             }

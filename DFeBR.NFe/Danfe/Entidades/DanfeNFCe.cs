@@ -193,11 +193,11 @@ namespace DFeBR.EmissorNFe.Danfe.Entidades
 
             #endregion,
 
-            var infAdicionais = nfe.infNFe.infAdic.infCpl;
+            var infAdicionais = nfe.infNFe.infAdic?.infCpl ?? string.Empty;
 
             #region Impostos
 
-            var dadosTributos = nfe.infNFe.infAdic.infCpl;
+            var dadosTributos = nfe.infNFe.infAdic?.infCpl ?? string.Empty;
             DadosTributos = dadosTributos;
 
             #endregion
