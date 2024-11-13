@@ -18,6 +18,7 @@ using DFeBR.EmissorNFe.Utilidade.Tipos;
 
 namespace DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.RetornoServicos.Inutilizacao
 {
+    [XmlRoot(Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class infInutEnv
     {
         #region Propriedades
