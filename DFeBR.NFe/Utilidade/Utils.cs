@@ -33,7 +33,7 @@ using System.Xml.Serialization;
 using DFeBR.EmissorNFe.Utilidade.Entidades;
 using DFeBR.EmissorNFe.Utilidade.Exceptions;
 using DFeBR.EmissorNFe.Utilidade.Tipos;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
 
 #endregion
 
@@ -62,8 +62,8 @@ namespace DFeBR.EmissorNFe.Utilidade
                 int serie, long numero, int tipoEmissao, int cNf)
         {
             var chave = new StringBuilder();
-            chave.Append(((int) ufEmitente).ToString("D2")).Append(Convert.ToDateTime(dataEmissao).ToString("yyMM")).Append(cnpjEmitente)
-                    .Append(((int) modelo).ToString("D2")).Append(serie.ToString("D3")).Append(numero.ToString("D9"))
+            chave.Append(((int)ufEmitente).ToString("D2")).Append(Convert.ToDateTime(dataEmissao).ToString("yyMM")).Append(cnpjEmitente)
+                    .Append(((int)modelo).ToString("D2")).Append(serie.ToString("D3")).Append(numero.ToString("D9"))
                     .Append(tipoEmissao.ToString()).Append(cNf.ToString("D8"));
             var digitoVerificador = ObterDigitoVerificador(chave.ToString());
             chave.Append(digitoVerificador);
@@ -625,10 +625,10 @@ namespace DFeBR.EmissorNFe.Utilidade
             var str = new StringBuilder();
             var error = new ErrorTrace
             {
-                    Data = DateTime.Now.ToString("g"),
-                    Detalhe = ex.GetType().Name,
-                    Mensagem = $"{ex.Message}.{msg}",
-                    StackTrace = ex.StackTrace
+                Data = DateTime.Now.ToString("g"),
+                Detalhe = ex.GetType().Name,
+                Mensagem = $"{ex.Message}.{msg}",
+                StackTrace = ex.StackTrace
             };
             var content = JsonSerialize(error);
             str.Append(content);
@@ -647,7 +647,7 @@ namespace DFeBR.EmissorNFe.Utilidade
             {
                 var lst = new List<ErrorTrace>();
                 var c1 = LerArquivo(CaminhoLog, NomeArqErrorLog);
-                var d1 = c1.Split(new[] {"?"}, StringSplitOptions.RemoveEmptyEntries);
+                var d1 = c1.Split(new[] { "?" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var item in d1)
                 {
                     var str = item.Replace(Environment.NewLine, string.Empty);
@@ -655,9 +655,9 @@ namespace DFeBR.EmissorNFe.Utilidade
                         lst.Add(JsonConvert.DeserializeObject<ErrorTrace>(str,
                                 new JsonSerializerSettings
                                 {
-                                        NullValueHandling = NullValueHandling.Ignore,
-                                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                                        Formatting = Formatting.Indented
+                                    NullValueHandling = NullValueHandling.Ignore,
+                                    MissingMemberHandling = MissingMemberHandling.Ignore,
+                                    Formatting = Formatting.Indented
                                 }));
                 }
 
@@ -694,7 +694,7 @@ namespace DFeBR.EmissorNFe.Utilidade
         public static string JsonSerialize(object entity)
         {
             var jsonconverter = JsonConvert.SerializeObject(entity, Formatting.Indented,
-                    new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented});
+                    new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented });
             return jsonconverter;
         }
 
@@ -746,12 +746,25 @@ namespace DFeBR.EmissorNFe.Utilidade
         /// <returns></returns>
         public static T ConverterXMLParaClasse<T>(this string input) where T : class
         {
-            var keyNomeClasseEmUso = typeof(T).FullName;
-            var ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
-            using (var sr = new StringReader(input))
+            try
             {
-                return (T) ser.Deserialize(sr);
+                var keyNomeClasseEmUso = typeof(T).FullName;
+                var ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
+                using (var sr = new StringReader(input))
+                {
+                    ser.UnknownElement += (sender, e) =>
+                    {
+                       return;
+                    };
+                    return (T)ser.Deserialize(sr);
+                }
             }
+            catch (System.Exception ex)
+            {
+
+                throw new Exception($"Aconteceu um erro ao tentar deserializar o XML, o erro foi: {ex.Message} com as exception: {ex.ToString()}");
+            }
+
         }
 
         /// <summary>
@@ -769,7 +782,7 @@ namespace DFeBR.EmissorNFe.Utilidade
             var stream = new FileStream(arquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             try
             {
-                return (T) serializador.Deserialize(stream);
+                return (T)serializador.Deserialize(stream);
             }
             finally
             {
@@ -890,8 +903,8 @@ namespace DFeBR.EmissorNFe.Utilidade
 
         private static XmlSerializer BuscarNoCache(string chave, Type type)
         {
-            if (CacheSerializers.Contains(chave)) return (XmlSerializer) CacheSerializers[chave];
-            var ser = XmlSerializer.FromTypes(new[] {type})[0];
+            if (CacheSerializers.Contains(chave)) return (XmlSerializer)CacheSerializers[chave];
+            var ser = XmlSerializer.FromTypes(new[] { type })[0];
             CacheSerializers.Add(chave, ser);
             return ser;
         }
@@ -1242,7 +1255,7 @@ namespace DFeBR.EmissorNFe.Utilidade
             var type = value.GetType();
             var memberInfo = type.GetMember(value.ToString());
             var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
-            return (T) attributes[0];
+            return (T)attributes[0];
         }
 
         /// <summary>
@@ -1294,8 +1307,8 @@ namespace DFeBR.EmissorNFe.Utilidade
 
         public static decimal ArredondarParaBaixo(this decimal valor, int casasDecimais)
         {
-            var divisor = (decimal) Math.Pow(10, casasDecimais);
-            var dividendo = (int) Math.Truncate(divisor * valor);
+            var divisor = (decimal)Math.Pow(10, casasDecimais);
+            var dividendo = (int)Math.Truncate(divisor * valor);
             return dividendo / divisor;
         }
 
