@@ -105,6 +105,20 @@ namespace DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.Informacoes.Pagamento
         /// </summary>
         [Description("Boleto Bancário")] [XmlEnum("15")]
         fpBoletoBancario = 15, // VERSÃO 4.00
+        [Description("Depósito Bancário")] [XmlEnum("16")]
+        fpDepositoBancario = 16,
+        [Description("Pagamento Instantâneo (PIX) - Dinâmico")] [XmlEnum("17")]
+        fpPagamentoInstantanioPixDinamico = 17,
+        [Description("	Transferência bancária, Carteira Digital")] [XmlEnum("18")]
+        fpCarteiraDigital = 18,
+        [Description("Programa de fidelidade, Cashback, Crédito Virtual")] [XmlEnum("19")]
+        fpProgramaFidelidade = 19,
+        [Description("Pagamento Instantâneo (PIX) - Estático")] [XmlEnum("20")]
+        fpPagamentoInstantaneoPixEstatico = 20,
+        [Description("Crédito em Loja - Não cartão próprio")] [XmlEnum("21")]
+        fpCreditoLojaDireto = 21,
+        [Description("Pagamento Eletrônico não Informado - falha de hardware do sistema emissor")] [XmlEnum("21")]
+        fpPagamentoEletronicoNaoInformado = 22,
 
         /// <summary>
         ///     90-Sem pagamento
